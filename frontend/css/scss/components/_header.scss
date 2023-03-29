@@ -1,0 +1,103 @@
+header {
+    padding: 15px 0;
+
+    @include lg {
+        padding: 2rem 0;
+    }
+
+    .header {
+        z-index: 1000;
+        margin-top: 0;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:    "logo btn"
+                                "menu menu";
+
+        @include lg {
+            grid-template-columns: 1fr 2fr;
+            grid-template-areas:    "logo menu";
+        }
+    }
+   
+    .logo {
+        grid-area: logo;
+    }
+
+    #menu {
+        grid-area: menu;
+        font-family: $font-poppins;
+        z-index: 1000;
+
+
+        @include lg {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+
+        .menu-links {
+            color: $color-theme-dark;
+
+            @include lg {
+                padding-top: 0;
+            }
+
+            .link {
+                color: $color-theme-dark;
+                display: block;
+                text-align: right;
+                padding: 0.5rem;
+
+                @include lg {
+                    display: inline-block;
+                    margin: 0 1.5rem;
+                    padding: 0;
+                }
+
+                &:hover {
+                    color: $color-theme;
+                }
+            }
+        }    
+
+        .menu-icons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            padding: 0.5rem;
+
+            @include lg {
+                position: static;
+                padding: 0;
+            }
+
+            .link {
+                color: $color-gray-30;
+                margin: auto 1rem;
+
+                &:hover {
+                    color: $color-theme;
+                }
+            }
+        }
+    }
+
+    .toggle {
+        grid-area: btn;
+        display: flex;
+        justify-content: end;
+
+        @include lg {
+            display: none;
+        }
+
+        .menu-btn {
+            padding: 0.5rem 1rem;
+            font-size: 1.4rem;
+        }
+    }
+}

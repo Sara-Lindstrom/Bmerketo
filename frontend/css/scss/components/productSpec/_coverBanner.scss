@@ -1,0 +1,44 @@
+.background-banner{
+    display: none;
+    position: relative;
+    max-width: 100vw;
+
+    @include md{
+        display: block;
+    }
+
+    .background-image{
+        width: 100%;
+    }
+
+    .banner-text{        
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform:translate(-50%,-50%);
+        font-size: 1rem;
+        font-weight: $font-weight-bold;
+        text-align: center;
+
+        .title{
+            font-size: 1rem;
+            font-weight: $font-weight-bold;
+
+            @include lg{
+                font-size: 1.5rem;
+            }
+        }
+
+        .subtitle{
+            font-size: 0.7rem;
+            font-weight: $font-weight-light;
+            margin-bottom: 0;
+
+            @include lg{
+                font-size: 1rem;
+                font-weight: $font-weight-regular;
+            }
+        }
+    }
+
+}
