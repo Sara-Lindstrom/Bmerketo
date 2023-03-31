@@ -1,83 +1,138 @@
 header {
-    padding: 15px 0;
+    position: relative;
+    width: 100%;
+    height: 80px;
+    z-index: 1;
+    background-color: white;
+    display: flex;
+    padding: 0 20px;
 
-    @include lg {
-        padding: 2rem 0;
-    }
 
     .header {
-        z-index: 1000;
-        margin-top: 0;
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-areas:    "logo btn"
-                                "menu menu";
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:    "logo toggle";
 
-        @include lg {
-            grid-template-columns: 1fr 2fr;
-            grid-template-areas:    "logo menu";
+        @include lg  {
+            grid-template-columns: 4fr 4fr;
+            grid-template-areas:    "logo menulinks";
+        }
+
+        @include xl {
+            grid-template-columns: 4fr 4fr 1fr;
+            grid-template-areas:    "logo menulinks menuicons";
         }
     }
-   
+
     .logo {
-        grid-area: logo;
+        grid-area: logo; 
+        display: flex;
+        align-items: center;
+
+        img {
+            margin-right: 5px;
+        }
     }
 
-    #menu {
-        grid-area: menu;
-        font-family: $font-poppins;
-        z-index: 1000;
+    .menu-links {
+        grid-area: menulinks;
+        background-color: $color-theme-dark;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 0vw;
+        padding-top: 80px;
+        transform: translateX(0%);
+        transition: all 0.25s;
+        font-size: 20px;
+        overflow: hidden;
 
 
         @include lg {
+            position: static;
+            width: 100%;
+            font-size: 16px;
+            padding: 0;
+            background-color: transparent;
+            color: $color-theme-dark;
+            display: flex;
+            justify-content: flex-end;   
+            align-items: center;  
+        }
+
+        @include xl {
+            margin-right: 20px;
+        }
+
+        .link {
+            font-family: $font-poppins;
+            color: white;
+            display: flex; 
+            justify-content: center;
+            padding: 20px 0;
+            text-decoration: none;
+            font-weight: $font-weight-regular;
+
+            &:hover {
+                background-color: $color-theme-dark
+            }
+
+            @include lg {
+                color: $color-theme-dark;
+                border: none;
+                padding: 0;
+                margin: 0 0 0 30px;
+                justify-content: right;
+                font-size: 16px;
+                
+                &:hover {
+                    background-color: transparent;
+                    color: $color-theme;
+                }
+            }
+        }
+    }
+
+    .menu-icons {
+        grid-area: menuicons;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background-color: $color-theme-dark;
+        color: white;
+
+        @include xl {
+            position: static;
+            padding: 0;
+            background-color: white;
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
 
+        .link {
+            font-family: $font-poppins;
+            color: white;
+            text-decoration: none;
+            margin: 20px;
+            font-size: 18px;
 
-        .menu-links {
-            color: $color-theme-dark;
-
-            @include lg {
-                padding-top: 0;
+            &:hover {
+                color: $color-theme;
             }
 
-            .link {
-                color: $color-theme-dark;
-                display: block;
-                text-align: right;
-                padding: 0.5rem;
-
-                @include lg {
-                    display: inline-block;
-                    margin: 0 1.5rem;
-                    padding: 0;
-                }
-
-                &:hover {
-                    color: $color-theme;
-                }
-            }
-        }    
-
-        .menu-icons {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            padding: 0.5rem;
-
-            @include lg {
+            @include xl {
                 position: static;
-                padding: 0;
-            }
-
-            .link {
                 color: $color-gray-30;
-                margin: auto 1rem;
+                margin: 0 0 0 25px;
+                font-size: 18px;
 
                 &:hover {
                     color: $color-theme;
@@ -87,17 +142,20 @@ header {
     }
 
     .toggle {
-        grid-area: btn;
-        display: flex;
-        justify-content: end;
+        grid-area: toggle;
+        position: relative;
+        display: block;
+        text-align: right;
+        z-index: 1;
 
         @include lg {
             display: none;
         }
-
-        .menu-btn {
-            padding: 0.5rem 1rem;
-            font-size: 1.4rem;
-        }
     }
+}
+
+.open-menu {
+    width: 100vw !important;
+    opacity: 0.99;
+    transform: translateX(-100%);
 }

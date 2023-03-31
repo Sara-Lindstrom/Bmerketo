@@ -1,7 +1,6 @@
 .background-banner{
     display: none;
     position: relative;
-    max-width: 100vw;
 
     @include md{
         display: block;
@@ -11,7 +10,7 @@
         width: 100%;
     }
 
-    .banner-text{        
+    .breadcrumb{     
         position: absolute;
         left: 50%;
         top: 50%;
@@ -29,14 +28,21 @@
             }
         }
 
-        .subtitle{
-            font-size: 0.7rem;
-            font-weight: $font-weight-light;
-            margin-bottom: 0;
+        
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: $font-weight-regular;
+            font-family: $font-poppins;
 
-            @include lg{
-                font-size: 1rem;
-                font-weight: $font-weight-regular;
+            li {
+                padding: 0;
+                margin: 0 10px 0 0;
             }
         }
     }

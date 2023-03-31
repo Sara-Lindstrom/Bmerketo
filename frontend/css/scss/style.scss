@@ -3,6 +3,7 @@
 @import "./core/variables";
 @import "./core/utilities";
 @import "./core/buttons";
+@import "./core/forms";
 
 //Components
 //Home
@@ -17,7 +18,14 @@
 @import "./components/newsletterSignup";
 @import "./components/footer";
 //productSpec
-@import "./components/productSpec/coverBanner";
+@import "./components/productSpec/breadcrumb";
 @import "./components/productSpec/productSpec";
 @import "./components/productSpec/informationTabs";
 @import "./components/productSpec/relatedProduct";
+//contact
+@import "./components/contact/contactform";
+@import "./components/contact/map";
+//register
+@import "./components/register/registerform";
+//login
+@import "./components/loginform";
