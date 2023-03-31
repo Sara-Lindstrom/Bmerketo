@@ -1,0 +1,32 @@
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+$font-poppins : 'Poppins', sans-seif;
+$font-roboto : 'Roboto', sans-seif;
+
+$font-weight-light : 300;
+$font-weight-regular : 400;
+$font-weight-semibold : 500;
+$font-weight-bold : 700;
+$font-weight-black : 900;
+
+//Colors
+$color-theme : #FA3150;
+$color-theme-dark : #292929; 
+$color-theme-light : #FAEFEF;
+$color-gray-10 : #F3F2F2;
+$color-gray-20 : #CCCCCC;
+$color-gray-30:#AEAEAE;
+$color-gray-40:#797979;
+$color-green: #92B8B9;
+$color-yellow: #FFB71B;
+
+// BREAKPOINTS
+$breakpoint-md: 768px;
+$breakpoint-md-max-width: 720px;
+$breakpoint-lg: 992px;
+$breakpoint-lg-max-width: 960px;
+$breakpoint-xl: 1140px;
+$breakpoint-xl-max-width: 1140px;
+$breakpoint-xxl: 1400px;
+$breakpoint-xxl-max-width: 1320px;

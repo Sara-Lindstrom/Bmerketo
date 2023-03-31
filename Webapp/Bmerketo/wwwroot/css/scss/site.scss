@@ -1,0 +1,37 @@
+//Core
+@import "./core/mixins";
+@import "./core/variables";
+@import "./core/utilities";
+@import "./core/buttons";
+@import "./core/forms";
+
+//Components
+//general
+@import "./components/general/breadcrumb";
+@import "./components/general/footer";
+@import "./components/general/header";
+@import "./components/general/card";
+
+//home
+@import "./components/home/showcase";
+@import "./components/home/post";
+@import "./components/home/bestCollection";
+@import "./components/home/saleShowcase";
+@import "./components/home/topSeller";
+@import "./components/home/blog";
+@import "./components/home/newsletterSignup";
+
+//productSpec
+@import "./components/productSpec/productSpec";
+@import "./components/productSpec/informationTabs";
+@import "./components/productSpec/relatedProduct";
+
+//contact
+@import "./components/contact/contactform";
+@import "./components/contact/map";
+
+//register
+@import "./components/register/registerform";
+
+//login
+@import "./components/login/loginform";

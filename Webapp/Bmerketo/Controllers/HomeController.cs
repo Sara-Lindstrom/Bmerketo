@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Bmerketo.Controllers;
-
-public class HomeController : Controller
+namespace Bmerketo.Controllers
 {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        ViewData["Title"] = "Home";
-        return View();
+        public IActionResult Index()
+        {
+            ViewData["title"] = "Home"; 
+            return View();
+        }
     }
 }

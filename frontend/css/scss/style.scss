@@ -6,19 +6,20 @@
 @import "./core/forms";
 
 //Components
+//geberal
+@import "./components/general/breadcrumb";
+@import "./components/general/footer";
+@import "./components/general/header";
+@import "./components/general/card";
 //Home
-@import "./components/header";
 @import "./components/showcase";
-@import "./components/card";
 @import "./components/post";
 @import "./components/bestCollection";
 @import "./components/saleShowcase";
 @import "./components/topSeller";
 @import "./components/blog";
 @import "./components/newsletterSignup";
-@import "./components/footer";
 //productSpec
-@import "./components/productSpec/breadcrumb";
 @import "./components/productSpec/productSpec";
 @import "./components/productSpec/informationTabs";
 @import "./components/productSpec/relatedProduct";
@@ -28,4 +29,4 @@
 //register
 @import "./components/register/registerform";
 //login
-@import "./components/loginform";
+@import "./components/login/loginform";

@@ -1,4 +1,115 @@
-﻿@*
-*@
-@{
-}
+﻿
+    <!-- Showcase -->
+    <section class="banner">
+        <div class="container showcase">
+            <div class="content">
+                <p class="ingress">WELCOME TO BMERKETO SHOP</p>
+                <h3 class="title">Exclusive Chair<br>Gold Collection.</h3>
+                <a asp-controller="products" asp-action="index" class="theme-button button">SHOP NOW</a>
+            </div>
+
+            <div class="image">
+                <img class="img" src="/images/placeholders/625x647.svg">
+            </div>
+        </div>
+    </section>
+    <!-- Showcase end -->
+    <!-- Best Collection -->
+    <section class="container bestselling">
+        <h3 class="sectiontitle">Best Collection</h3>
+        <ul class="categories">
+            <li class="category-item">All</li>
+            <li class="category-item">Bag</li>
+            <li class="category-item">Dress</li>
+            <li class="category-item">Decoration</li>
+            <li class="category-item">Essentials</li>
+            <li class="category-item">Interior</li>
+            <li class="category-item">Laptop</li>
+            <li class="category-item">Mobile</li>
+            <li class="category-item">Beaty</li>
+        </ul>
+
+        <div class="collection">
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml"/>
+            <partial name="/Views/Partials/_Card.cshtml" />
+            <partial name="/Views/Partials/_Card.cshtml" />
+        </div>
+        <button class="show-btn light-button">LOAD MORE <i class="fa-solid fa-arrow-rotate-right"></i></button>
+    </section>
+    <!-- Best collection end -->
+    <!-- Sale -->
+    <div class="sale-banner">
+        <div class="sale container">
+            <div class="sale-product">
+                <partial name="/Views/Partials/_CardFeatured.cshtml" />
+            </div>
+
+            <!-- sale card -->
+            <div class="sale-card">
+                <p class="ingress">UP TO SELL</p>
+                <h4 class="sale-title">50% OFF</h4>
+                <h6 class="sale-subtitle">Get The Best Price</h6>
+                <p class="sale-info">Get the best daily offer et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren no sea taki</p>
+                <a href="#" class="discover">Discover More</a>
+            </div>
+
+            <div class="sale-product">
+                <partial name="/Views/Partials/_CardFeatured.cshtml" />
+            </div>
+        </div>
+    </div>
+    <!-- sale end -->
+    <!-- TopSelling -->
+    <div class="topSelling">
+        <h4 class="sectiontitle">Top Selling Products This Week</h4>
+        <div class="topSelling-card-section">
+
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>            
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>            
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>            
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>            
+            <div class="topSelling-card">
+                <partial name="/Views/Partials/_Card.cshtml" />
+            </div>
+        </div>
+        <div>
+            <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <!-- TopSelling end -->
+    <!-- blog collection -->
+    <div class="blog container">
+        <!-- post -->
+        <partial name="/Views/Partials/_Post.cshtml" />
+        <partial name="/Views/Partials/_Post.cshtml" />
+        <partial name="/Views/Partials/_Post.cshtml" />
+    </div>
+    <!-- blog collection end -->
+    <!-- newsletter signup -->
+    <div class="newsletterSignup">
+        <div class="signup container">
+            <h6 class="newsletter-title">Signup For Newsletter</h6>
+            <div class="signup-form">
+                <input id="signup-input" type="text" placeholder="Enter Your Mail Here">
+                <button class="signup-btn theme-button" type="submit">SUBSCRIBE<span class="hidden-text"> FOR NEWSLETTER</span></button>
+            </div>
+        </div>
+    </div>
+    <!-- newsletter signup end -->
