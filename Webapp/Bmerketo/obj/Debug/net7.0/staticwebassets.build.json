@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Z3YIQF8Id0FzHbB53PAFlgNf/TuZKrhC48K/ePiCz3c=",
+  "Hash": "Xo5jo95R4gMVoGHMLPUJVwzP+vO6sZStYBszNDn2KCs=",
   "Source": "Bmerketo",
   "BasePath": "_content/Bmerketo",
   "Mode": "Default",
@@ -253,6 +253,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\scss\\components\\login\\_loginform.scss"
+    },
+    {
+      "Identity": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\css\\scss\\components\\ProductRegistration\\_productRegistrationForm.scss",
+      "SourceId": "Bmerketo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\",
+      "BasePath": "_content/Bmerketo",
+      "RelativePath": "css/scss/components/ProductRegistration/_productRegistrationForm.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\scss\\components\\ProductRegistration\\_productRegistrationForm.scss"
     },
     {
       "Identity": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\css\\scss\\components\\productSpec\\_informationTabs.scss",

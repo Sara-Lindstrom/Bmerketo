@@ -1,8 +1,7 @@
-.topSelling{
+.topSelling {
     margin: 3rem;
-    text-align: center;
 
-    .topSelling-card-section{
+    .topSelling-card-section {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-row: auto;
@@ -10,35 +9,35 @@
         margin: 1rem auto;
         margin-top: 1.5rem;
 
-        @include md{
+        @include md {
             grid-template-columns: repeat(3, 1fr);
+            margin: 1rem;
             margin-top: 2.5rem;
         }
 
-        @include lg{
+        @include lg {
             grid-template-columns: repeat(6, 1fr);
+            margin: 1rem 3rem;
         }
 
-        .topSelling-card{
-            .card-image-small{
-                max-width: 35vw;
+        .topSelling-card {
+            max-width: 35vw;
 
-                @include md{
-                    max-width: 25vw;
-                }
+            @include md {
+                max-width: 25vw;
+            }
 
-                @include lg{
-                    max-width: 15vw !important;
-                }
+            @include lg {
+                max-width: 12vw !important;
+            }
 
-                @include xl {
-                    max-width: initial;
-                }
+            @include xl {
+                max-width: initial;
             }
         }
     }
 
-    .arrow-btn{
+    .arrow-btn {
         border: 2px solid $color-gray-20;
         border-radius: 5px;
         color: $color-gray-30;

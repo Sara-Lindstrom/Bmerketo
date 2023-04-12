@@ -1,0 +1,73 @@
+﻿@model ProductRegistrationViewModel
+
+<section class="formSection">
+    <div class="container form-container">
+        <div class="title">Please Register your new Product</div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <form class="register-product-form" method="post" enctype="multipart/form-data" novalidate>
+
+            <div class="Title form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="invalid" required>
+                <span asp-validation-for="Title" class="error"></span>
+            </div>
+            <div class="Price form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="invalid">
+                <span asp-validation-for="Price" class="error"></span>
+            </div>
+            <div class="Category form-group">
+                <label asp-for="Category"></label>
+                <select asp-for="Category" class="invalid" asp-items="Html.GetEnumSelectList<CategoryEnumModel.CategoryAlternativeEnum>()">
+                    <option value="" selected disabled hidden>Choose category</option>
+                </select>
+                <span asp-validation-for="Category" class="error"></span>
+            </div>
+            <div class="DiscountPrice form-group">
+                <label asp-for="DiscountPrice"></label>
+                <input asp-for="DiscountPrice">
+                <span asp-validation-for="DiscountPrice" class="error"></span>
+            </div>
+            <div class="Review form-group">
+                <label asp-for="Review"></label>
+                <input asp-for="Review">
+                <span asp-validation-for="Review" class="error"></span>
+            </div>
+            <div class="PrimaryImage form-group">
+                <label asp-for="PrimaryImage"></label>
+                <input asp-for="PrimaryImage" type="file" class=" imageInput" data-val-regex-pattern="^.*\.(svg)$" data-val-regex=" Please enter Image in svg format">
+                <span asp-validation-for="PrimaryImage" class="error"></span>
+            </div>
+            <div class="ImageOne form-group">
+                <label asp-for="ImageOne"></label>
+                <input asp-for="ImageOne" type="file" class=" imageInput">
+                <span asp-validation-for="ImageOne" class="error"></span>
+            </div>
+            <div class="ImageTwo form-group">
+                <label asp-for="ImageTwo"></label>
+                <input asp-for="ImageTwo" type="file" class=" imageInput">
+                <span asp-validation-for="ImageTwo" class="error"></span>
+            </div>
+            <div class="ImageThree form-group">
+                <label asp-for="ImageThree"></label>
+                <input asp-for="ImageThree" type="file" class=" imageInput">
+                <span asp-validation-for="ImageThree" class="error"></span>
+            </div>
+            <div class="ImageFour form-group">
+                <label asp-for="ImageFour"></label>
+                <input asp-for="ImageFour" type="file" class=" imageInput">
+                <span asp-validation-for="ImageFour" class="error"></span>
+            </div>      
+            <div class="Description form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="invalid" rows="4"></textarea>
+                <span asp-validation-for="Description" class="error"></span>
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="theme-button form-submit-btn">Submit Product</button>
+            </div>
+        </form>
+    </div>
+</section>

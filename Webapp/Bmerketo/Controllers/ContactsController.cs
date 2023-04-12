@@ -1,4 +1,4 @@
-﻿using Bmerketo.ViewModels;
+﻿using Bmerketo.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bmerketo.Controllers

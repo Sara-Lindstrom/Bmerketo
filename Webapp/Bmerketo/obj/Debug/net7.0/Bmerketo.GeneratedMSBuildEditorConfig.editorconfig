@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\SaraM\Desktop\repo\ASPNET\bmerketo\Webapp\Bmerketo
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Accounts/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Contacts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,10 +40,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbHNcX0NhcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Partials/_CardFeatured.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbHNcX0NhcmRGZWF0dXJlZC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Partials/_Footer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbHNcX0Zvb3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,8 +52,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbHNcX1Bvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Products/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Products/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Products/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdHNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/SaraM/Desktop/repo/ASPNET/bmerketo/Webapp/Bmerketo/Views/Shared/_Layout.cshtml]

@@ -18,7 +18,8 @@
             display: none;
 
             @include md{
-                display: initial;
+                display: flex;
+                justify-content:center;
             }
         }
 

@@ -1,6 +1,7 @@
 .bestselling{
     text-align: center;
     margin-top: 2rem;
+    padding:0;
 
     .categories {
         display: none;
@@ -36,14 +37,7 @@
         
         @include md{
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem 0;
-        }
-
-        .collection-card{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: left;
+            gap: 2rem 10px;
         }
     }
 

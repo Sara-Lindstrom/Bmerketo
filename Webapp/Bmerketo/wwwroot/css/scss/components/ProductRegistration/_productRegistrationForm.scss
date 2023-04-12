@@ -1,0 +1,35 @@
+﻿.register-product-form {
+    @include md {
+        grid-template-areas:
+            "title title"
+            "price category"
+            "review discountedPrice"
+            "primaryImage primaryImage"
+            "imageOne imageTwo"
+            "imageThree imageFour"
+            "description description"
+            "button button"
+    }
+
+    .Title {grid-area: title;}
+
+    .Price {grid-area: price;}
+
+    .Category {grid-area: category;}
+
+    .DiscountedPrice {grid-area: discountedPrice;}
+
+    .Review {grid-area: review;}
+
+    .PrimaryImage {grid-area: primaryImage;}
+
+    .ImageOne {grid-area: imageOne;}
+
+    .ImageTwo {grid-area: imageTwo;}
+
+    .ImageThree {grid-area: imageThree;}
+
+    .ImageFour {grid-area: imageFour;}
+
+    .Description {grid-area: description;}
+}

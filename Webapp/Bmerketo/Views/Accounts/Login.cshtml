@@ -1,0 +1,34 @@
+﻿@model LoginViewModel
+
+<section class="formSection">
+    <div class="container form-container">
+        <div class="title">Please login to your account</div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <form class="login-form" method="post" novalidate class="">
+            <div class="email form-group">
+                <label asp-for="Email"></label>
+                <a class="form-link" asp-controller="accounts" asp-action="register">Don't Have An Account Yet?</a>
+                <input asp-for="Email" >
+                <span asp-validation-for="Email" class="error"></span>
+            </div>
+            <div class="password form-group">
+                <label asp-for="Password"></label>
+                <a class="form-link" href="#">Forgot Your Password?</a>
+                <input asp-for="Password" >
+                <span asp-validation-for="Password" class="error"></span>
+            </div>
+            <div class="terms form-checkbox-group">
+                <label class="custom-checkbox">
+                    Please keep me logged in
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="form-btn">
+                <button type="submit" class="theme-button form-submit-btn">Login</button>
+            </div>
+        </form>
+    </div>
+</section>

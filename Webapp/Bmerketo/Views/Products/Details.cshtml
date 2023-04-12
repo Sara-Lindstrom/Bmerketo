@@ -1,0 +1,121 @@
+﻿@model BreadcrumbViewModel
+@{
+    var cardSizeSmall = new ViewDataDictionary(ViewData) { { "CardSize", "card-image-small" } };
+}
+
+<partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model"/>
+
+<!-- product specifications -->
+<div class="container product-spec">
+    <div class="image-container">
+        <img class="large-image" src="./images/placeholders/501x430.svg" alt="">
+
+        <div class="small-image-container">
+            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
+            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
+            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
+            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
+        </div>
+    </div>
+
+    <div class="product-specifications">
+        <h6 class="product-name">Young Star Smart Shoe in Fashion</h6>
+        <p class="product-description">Lirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+        <hr class="hr">
+
+
+        <div class="product-form">
+            <div class="product-rating">
+                <div class="star-rating">
+                    <i class="fa-solid fa-star star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <a href="#" class="ratings">16 Ratings</a>
+            </div>
+
+            <p class="price">$30</p>
+
+            <div class="add-amount">
+                <div class="counter">
+                    <button class='counter-btn left' type='button'>+</button>
+                    <p class='count-amount'>2</p>
+                    <button class='counter-btn right' type='button'>-</button>
+                </div>
+
+                <div class="btn-container">
+                    <button class="theme-button add-cart">Add To Cart <i class="fa-light fa-cart-arrow-down"></i></button>
+                </div>
+            </div>
+
+            <div class="availability">
+                <i class="fa-solid fa-circle circle-color"></i>
+                <p class="availability-text">SKU: N/A</p>
+            </div>
+
+            <button class="light-button whishlist-btn">Add To Whishlist</button>
+
+            <p class="product-category">Category : Table Lamp, Lamp</p>
+        </div>
+    </div>
+</div>
+<!-- product specifications end -->
+<!-- Information tabs -->
+<!-- tabs -->
+<ul class="nav nav-tabs tabstyle container" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">DESCRIPTION</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="addInfo-tab" data-bs-toggle="tab" data-bs-target="#addInfo" type="button" role="tab" aria-controls="addInfo" aria-selected="false">ADDITIONAL INFO</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">REVIEWS (0)</button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">SHIPPING & DELIVERY</button>
+    </li>
+</ul>
+
+<!-- tab-info -->
+<div class="tab-content container tab-container" id="myTabContent">
+    <div class="tab-pane fade show active tab-info" id="description" role="tabpanel" aria-labelledby="description-tab">
+        <h6 class="tabtitle">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie.</h6>
+
+        <div class="information">
+            <p class="tabinformation">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et cusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata santus est Lorem ipsum dolor sit amet. Lorem ipsum dolor.<br>
+                accusantium laborum pretium hic excepturi harum repellat facilisis convallis potenti, adipiscing lectus aliqua. Asperiores repudiandae ipsam error erat, accusamus, cum taciti unde?<br>
+                Praesentium, pariatur, tempora consequuntur purus sapiente, iaculis vitae consequatur, rhoncus earum eleifend, hendrerit ipsum rhoncus ex error, impedit! Alias laboris sequi curae aptent? Eu sagittis eu, distinctio tortor? Dapibus delectus! Consequuntur luctus. <br>
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et cusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata santus est Lorem ipsum dolor sit amet. Lorem ipsum dolor.
+            </p>
+
+            <div class="img-container">
+                <img class="tabimage" src="./images/placeholders/469x356.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-pane fade tab-info" id="addInfo" role="tabpanel" aria-labelledby="addInfo-tab">Additional Information</div>
+    <div class="tab-pane fade tab-info" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">Reviews</div>
+    <div class="tab-pane fade tab-info" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">Shipping and delivery</div>
+</div>
+<!-- Information tabs end -->
+<!-- Related Products -->
+<div class="container related">
+    <h4 class="relatedTitle">Related Products</h4>
+
+    <div class="cardcontainer">
+        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
+        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
+        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
+        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
+
+    </div>
+</div>
+<!-- Related Products end -->
+

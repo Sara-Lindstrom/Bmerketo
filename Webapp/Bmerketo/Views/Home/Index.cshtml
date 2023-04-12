@@ -1,4 +1,19 @@
-﻿
+﻿@model HomeIndexViewModel
+@using System.Diagnostics
+
+@{
+    var cardSizeSmall = new ViewDataDictionary(ViewData) { { "CardSize", "card-small" } };
+    var cardSizeLarge = new ViewDataDictionary(ViewData) { { "CardSize", "card-large" } };
+
+    bool showMorebool = false;
+
+    bool ShowMore()
+    {
+        showMorebool = !showMorebool;
+        Debug.WriteLine("ShowMore method called. showMorebool = " + showMorebool);
+        return showMorebool;
+    }
+}
     <!-- Showcase -->
     <section class="banner">
         <div class="container showcase">
@@ -30,23 +45,30 @@
         </ul>
 
         <div class="collection">
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml"/>
-            <partial name="/Views/Partials/_Card.cshtml" />
-            <partial name="/Views/Partials/_Card.cshtml" />
+            @foreach (var card in Model.BestCollectionCards.Take(8))
+            {
+                <partial name="/Views/Partials/_Card.cshtml" model="card" view-data='cardSizeSmall' />
+            }
         </div>
-        <button class="show-btn light-button">LOAD MORE <i class="fa-solid fa-arrow-rotate-right"></i></button>
+        @if (Model.BestCollectionCards.Count() > 8)
+        {
+            <button class="show-btn light-button" id="showMoreButton">LOAD MORE <i class="fa-solid fa-arrow-rotate-right"></i></button>
+            <div class="d-none" id="bestCollectionSecond">
+                @foreach (var card in Model.BestCollectionCards.Skip(8))
+                {
+                    <partial name="/Views/Partials/_Card.cshtml" model="card" view-data='cardSizeSmall' />
+                }
+            </div>
+
+            <script src="path/to/site.js"></script>
+        }
     </section>
     <!-- Best collection end -->
     <!-- Sale -->
     <div class="sale-banner">
         <div class="sale container">
             <div class="sale-product">
-                <partial name="/Views/Partials/_CardFeatured.cshtml" />
+                <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.First()" view-data='cardSizeLarge' />
             </div>
 
             <!-- sale card -->
@@ -59,7 +81,7 @@
             </div>
 
             <div class="sale-product">
-                <partial name="/Views/Partials/_CardFeatured.cshtml" />
+                <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.Skip(1).First()" view-data='cardSizeLarge' />
             </div>
         </div>
     </div>
@@ -69,29 +91,23 @@
         <h4 class="sectiontitle">Top Selling Products This Week</h4>
         <div class="topSelling-card-section">
 
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>            
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>            
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>            
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>            
-            <div class="topSelling-card">
-                <partial name="/Views/Partials/_Card.cshtml" />
-            </div>
+            @foreach(CardModel card in Model.TopSellers)
+            {
+                <div class="topSelling-card">
+                    <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall'/>
+                </div>
+            }
+
         </div>
-        <div>
-            <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
+
+        @if(Model.TopSellers.Count() > 6)
+        {
+            <div>
+                <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="light-button arrow-btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        }
+
     </div>
     <!-- TopSelling end -->
     <!-- blog collection -->

@@ -59,3 +59,17 @@ a {
         font-weight: $font-weight-semibold;
     }
 }
+
+.validation-summary-errors {
+    color: $color-theme;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    font-family: $font-poppins; 
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

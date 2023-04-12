@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\css\\scss\\components\\ProductRegistration\\_productRegistrationForm.scss",
+      "PackagePath": "staticwebassets\\css\\scss\\components\\ProductRegistration\\_productRegistrationForm.scss"
+    },
+    {
       "Id": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\css\\scss\\components\\contact\\_contactform.scss",
       "PackagePath": "staticwebassets\\css\\scss\\components\\contact\\_contactform.scss"
     },
