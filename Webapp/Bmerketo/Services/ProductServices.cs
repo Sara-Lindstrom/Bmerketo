@@ -84,9 +84,9 @@ namespace Bmerketo.Services
                         Id = item.Id,
                         Title = item.Title,
                         ImageUrl = item.ProductImageData.PrimaryImageData,
+                        ImageMimeType = item.ProductImageData.PrimaryImageMimeType,
                         Price = item.Price,
                         DiscountPrice = item.DiscountPrice,
-
                     };
                     products.Add(productCard);
                 }

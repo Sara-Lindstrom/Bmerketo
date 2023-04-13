@@ -64,7 +64,7 @@ namespace Bmerketo.Models.ViewModels
 
 
         [Display(Name = "Profile Image (optional)")]
-        [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
+        [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in svg format")]
         public IFormFile? ProfileImg { get; set; }
 
 

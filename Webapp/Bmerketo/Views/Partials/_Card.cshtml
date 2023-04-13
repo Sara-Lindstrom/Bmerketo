@@ -6,7 +6,7 @@
 
 <div class="@cardSize card">
     <button class="card-link">
-        <img class="image" alt="" src="data:image/svg+xml;base64,@Model.ImageUrl">
+        <img class="image" alt="" src="@($"data:{Model.ImageMimeType};base64,{Model.ImageUrl}")">
 
         <div class="card-information">
             <h6 class="card-title">@Model.Title</h6>

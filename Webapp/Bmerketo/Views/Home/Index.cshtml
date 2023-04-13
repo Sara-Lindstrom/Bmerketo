@@ -65,26 +65,31 @@
     </section>
     <!-- Best collection end -->
     <!-- Sale -->
-    <div class="sale-banner">
-        <div class="sale container">
-            <div class="sale-product">
-                <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.First()" view-data='cardSizeLarge' />
-            </div>
+    @if (Model.SaleBannerCards.Count() != 0)
+    {
+        <div class="sale-banner">
+            <div class="sale container">
+                <div class="sale-product">
 
-            <!-- sale card -->
-            <div class="sale-card">
-                <p class="ingress">UP TO SELL</p>
-                <h4 class="sale-title">50% OFF</h4>
-                <h6 class="sale-subtitle">Get The Best Price</h6>
-                <p class="sale-info">Get the best daily offer et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren no sea taki</p>
-                <a href="#" class="discover">Discover More</a>
-            </div>
+                    <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.First()" view-data='cardSizeLarge' />
+                </div>
 
-            <div class="sale-product">
-                <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.Skip(1).First()" view-data='cardSizeLarge' />
+                <!-- sale card -->
+                <div class="sale-card">
+                    <p class="ingress">UP TO SELL</p>
+                    <h4 class="sale-title">50% OFF</h4>
+                    <h6 class="sale-subtitle">Get The Best Price</h6>
+                    <p class="sale-info">Get the best daily offer et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren no sea taki</p>
+                    <a href="#" class="discover">Discover More</a>
+                </div>
+
+                <div class="sale-product">
+                    <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.Skip(1).First()" view-data='cardSizeLarge' />
+                </div>
             </div>
         </div>
-    </div>
+    }
+
     <!-- sale end -->
     <!-- TopSelling -->
     <div class="topSelling">

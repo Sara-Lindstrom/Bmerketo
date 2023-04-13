@@ -40,27 +40,27 @@ public class ProductRegistrationViewModel
 
     [Required(ErrorMessage = "Primary image for the product is required")]
     [Display(Name = "Product primary Image *")]
-    [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
+    [ValidateFileExtension(new string[] { "jpeg",".jpg",".png",".gif",".bmp",".tiff",".webp",".svg" }, errorMessage: "Please enter Image in jpeg, jpg, png, gif, bmp, tiff, webp or svg format")]
     public IFormFile PrimaryImage { get; set; } = null!;
 
     [Required(ErrorMessage = "image is required")]
     [Display(Name = "Product Image *")]
-    [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
+    [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in jpeg, jpg, png, gif, bmp, tiff, webp or svg format")]
     public IFormFile ImageOne { get; set; } = null!;
 
     [Required(ErrorMessage = "image is required")]
     [Display(Name = "Product Image *")]
-    [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
+    [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in jpeg, jpg, png, gif, bmp, tiff, webp or svg format")]
     public IFormFile ImageTwo { get; set; } = null!;
 
     [Required(ErrorMessage = "image is required")]
+    [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in jpeg, jpg, png, gif, bmp, tiff, webp or svg format")]
     [Display(Name = "Product Image *")]
-    [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
     public IFormFile ImageThree { get; set; } = null!;
 
     [Required(ErrorMessage = "image is required")]
     [Display(Name = "Product Image *")]
-    [ValidateFileExtension(new string[] { ".svg" }, errorMessage: "Please enter Image in svg format")]
+    [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in jpeg, jpg, png, gif, bmp, tiff, webp or svg format")]
     public IFormFile ImageFour { get; set; } = null!;
 
 
@@ -79,10 +79,15 @@ public class ProductRegistrationViewModel
             {
                 Id = Guid.NewGuid(),
                 PrimaryImageData = TypeConvertServices.ImageIFormateFileTobase64Convert(registrationViewModel.PrimaryImage),
+                PrimaryImageMimeType = registrationViewModel.PrimaryImage.ContentType,
                 ImageDataOne = TypeConvertServices.ImageIFormateFileTobase64Convert(registrationViewModel.ImageOne),
+                ImageOneMimeType = registrationViewModel.ImageOne.ContentType,
                 ImageDatatwo = TypeConvertServices.ImageIFormateFileTobase64Convert(registrationViewModel.ImageTwo),
+                ImageTwoMimeType = registrationViewModel.ImageTwo.ContentType,
                 ImageDatathree = TypeConvertServices.ImageIFormateFileTobase64Convert(registrationViewModel.ImageThree),
+                ImagethreeMimeType= registrationViewModel.ImageThree.ContentType,
                 ImageDatafour = TypeConvertServices.ImageIFormateFileTobase64Convert(registrationViewModel.ImageFour),
+                ImageFourMimeType= registrationViewModel.ImageFour.ContentType,
             }
         };
     }
