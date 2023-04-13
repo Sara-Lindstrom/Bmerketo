@@ -153,6 +153,10 @@
       "PackagePath": "staticwebassets\\images\\placeholders\\625x647.svg"
     },
     {
+      "Id": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\images\\placeholders\\photo-1681296363726-45c9ca32abde.jpg",
+      "PackagePath": "staticwebassets\\images\\placeholders\\photo-1681296363726-45c9ca32abde.jpg"
+    },
+    {
       "Id": "C:\\Users\\SaraM\\Desktop\\repo\\ASPNET\\bmerketo\\Webapp\\Bmerketo\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

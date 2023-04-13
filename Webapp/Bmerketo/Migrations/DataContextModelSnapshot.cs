@@ -17,7 +17,7 @@ namespace Bmerketo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -103,9 +103,29 @@ namespace Bmerketo.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(MAX)");
 
+                    b.Property<string>("ImageFourMimeType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ImageOneMimeType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ImageTwoMimeType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("ImagethreeMimeType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
                     b.Property<string>("PrimaryImageData")
                         .IsRequired()
                         .HasColumnType("varchar(MAX)");
+
+                    b.Property<string>("PrimaryImageMimeType")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -145,6 +165,9 @@ namespace Bmerketo.Migrations
 
                     b.Property<string>("ProfileImage")
                         .HasColumnType("varchar(max)");
+
+                    b.Property<string>("ProfileImageMimeType")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<byte[]>("SecurityKey")
                         .IsRequired()

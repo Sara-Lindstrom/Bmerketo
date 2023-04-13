@@ -32,6 +32,8 @@ namespace Bmerketo.Models.Entities
 
         [Column(TypeName = "varchar(max)")]
         public string? ProfileImage { get; set; }
+        [Column(TypeName = "varchar(50)")]
+        public string? ProfileImageMimeType { get; set; }
 
         [Required]
         [Column(TypeName = "varbinary(max)")]
