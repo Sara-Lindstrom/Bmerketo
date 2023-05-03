@@ -1,0 +1,35 @@
+﻿@model UserAdministrationViewModel
+
+<div class="allUsers container">
+    <h5>All Users:</h5>
+
+    <nav class="navigation">
+        <section class="section">
+            <h6>Users</h6>
+
+            <ul class="alternatives">
+                @if (Model.Users.Count() > 0)
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <partial name="/Views/Partials/_UserCard.cshtml" model="@user" />
+                    }
+                }
+            </ul>
+        </section>
+
+        <section class="section">
+            <h6>Employees</h6>
+
+            <ul class="alternatives">
+                @if (Model.Employees.Count() > 0)
+                {
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <partial name="/Views/Partials/_UserCard.cshtml" model="@employee" />
+                    }                    
+                }
+            </ul>
+        </section>
+    </nav>
+</div>

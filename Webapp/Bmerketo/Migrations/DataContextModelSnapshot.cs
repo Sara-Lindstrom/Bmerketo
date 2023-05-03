@@ -22,29 +22,6 @@ namespace Bmerketo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Bmerketo.Models.Entities.AdressEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("StreetName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Adresses");
-                });
-
             modelBuilder.Entity("Bmerketo.Models.Entities.ProductEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -54,12 +31,18 @@ namespace Bmerketo.Migrations
                     b.Property<byte>("Category")
                         .HasColumnType("tinyint");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("DiscountPrice")
                         .HasColumnType("money");
+
+                    b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
@@ -132,54 +115,6 @@ namespace Bmerketo.Migrations
                     b.ToTable("ProductImageEntity");
                 });
 
-            modelBuilder.Entity("Bmerketo.Models.Entities.UserEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AdressId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(320)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<byte[]>("Password")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("char(13)");
-
-                    b.Property<string>("ProfileImage")
-                        .HasColumnType("varchar(max)");
-
-                    b.Property<string>("ProfileImageMimeType")
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<byte[]>("SecurityKey")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AdressId");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("Bmerketo.Models.Entities.ProductEntity", b =>
                 {
                     b.HasOne("Bmerketo.Models.Entities.ProductImageEntity", "ProductImageData")
@@ -189,17 +124,6 @@ namespace Bmerketo.Migrations
                         .IsRequired();
 
                     b.Navigation("ProductImageData");
-                });
-
-            modelBuilder.Entity("Bmerketo.Models.Entities.UserEntity", b =>
-                {
-                    b.HasOne("Bmerketo.Models.Entities.AdressEntity", "Adress")
-                        .WithMany()
-                        .HasForeignKey("AdressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Adress");
                 });
 #pragma warning restore 612, 618
         }

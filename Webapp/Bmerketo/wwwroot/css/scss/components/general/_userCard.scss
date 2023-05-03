@@ -1,0 +1,40 @@
+﻿.UserCard {
+    display: flex;
+    margin: auto;
+    padding: 20px 0 0 0;
+    justify-content: space-between;
+    align-items: center;
+
+    .img-frame-small {
+        border-radius: 50%;
+        display: none;
+        overflow: hidden;
+        position: relative;
+
+        @include md {
+            display: block;
+            width: 100px;
+            height: 100px;
+            shape-outside: circle();
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .information {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+        .info-display {
+            margin: 10px;
+        }
+    }
+}

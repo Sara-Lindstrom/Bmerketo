@@ -1,0 +1,44 @@
+﻿@model IdentityProfileModel
+
+<div class="title">
+    <h2>Hi @User.FindFirst("DisplayName").Value!</h2>
+</div>
+
+<div class="background">
+    <div class="profile-information">
+        @if(Model.Profile.ProfileImage != "")
+        {
+            <div class ="img-frame">
+                <img src="@($"data:{Model.Profile.ProfileImageMimeType};base64,{Model.Profile.ProfileImage}")" alt="">
+            </div>
+        }
+        else
+        {
+            <div class="img-frame">
+                <img src="~/images/placeholders/avatar.png" alt="">
+            </div>
+        }
+
+        <section class="information">
+            <p>Name: @Model.Profile.FirstName, @Model.Profile.LastName</p>
+
+            @if (!Model.Roles.Contains("user"))
+            {
+                <p>Position:</p> @foreach (var role in Model.Roles)
+                {
+                    <p>@role</p>
+                }
+            }
+
+
+            <p>Email: @Model.User.Email</p>
+
+            @if (Model.User.PhoneNumber != null)
+            {
+                <p>Phone: @Model.User.PhoneNumber</p>
+            }
+
+            <p>Adress: @Model.Profile.Adress.StreetName @Model.Profile.Adress.PostalCode, @Model.Profile.Adress.City</p>
+        </section>
+    </div>
+</div>

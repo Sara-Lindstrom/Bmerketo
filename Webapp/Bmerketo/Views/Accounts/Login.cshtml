@@ -6,7 +6,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-        <form class="login-form" method="post" novalidate class="">
+        <form class="login-form" method="post" novalidate>
             <div class="email form-group">
                 <label asp-for="Email"></label>
                 <a class="form-link" asp-controller="accounts" asp-action="register">Don't Have An Account Yet?</a>
@@ -21,8 +21,8 @@
             </div>
             <div class="terms form-checkbox-group">
                 <label class="custom-checkbox">
-                    Please keep me logged in
-                    <input type="checkbox" checked="checked">
+                    <label asp-for="KeepMeLoggedIn"></label>
+                    <input asp-for="KeepMeLoggedIn">
                     <span class="checkmark"></span>
                 </label>
             </div>

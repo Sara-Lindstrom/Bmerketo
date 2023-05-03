@@ -1,11 +1,8 @@
 ﻿
-using Bmerketo.Models;
-using Bmerketo.Models.Enums;
 using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Mvc;
 using static Bmerketo.Models.Enums.CategoryEnumModel;
-using System.Linq;
 
 namespace Bmerketo.Controllers
 {
@@ -22,11 +19,13 @@ namespace Bmerketo.Controllers
         {
             HomeIndexViewModel model = new HomeIndexViewModel
             {
-                BestCollectionCards = await _productService.GetByCategoryAsync(CategoryAlternativeEnum.BestSelection),
+                BestCollectionCards = await _productService.GetByCategoryAsync(CategoryAlternativeEnum.Featured),
 
-                SaleBannerCards = (await _productService.GetByCategoryAsync(CategoryAlternativeEnum.Sale)).Take(2),
+                NewestProducts = await _productService.GetNewestProductsAsync(8),
 
-                TopSellers = await _productService.GetRandomAsync(6)
+                SaleBannerCards = await _productService.GetRandomAsync(2),
+
+                TopSellers = await _productService.GetByCategoryAsync(CategoryAlternativeEnum.Popular)
             };
 
             ViewData["title"] = "Home"; 

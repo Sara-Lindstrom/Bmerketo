@@ -1,0 +1,22 @@
+﻿@model IdentityProfileModel
+
+<li class="UserCard">
+    <div class="img-frame-small">
+        @if (Model.Profile.ProfileImage != "")
+        {
+            <img src="@($"data:{Model.Profile.ProfileImageMimeType};base64,{Model.Profile.ProfileImage}")" alt="">
+        }
+        else
+        {
+            <img src="~/images/placeholders/avatar.png" alt="">
+        }
+    </div>
+
+    <div class="information">
+        <p class="info-display">@Model.Profile.FirstName, @Model.Profile.LastName</p>
+        @foreach(var role in Model.Roles)
+        {
+            <p class="info-display">@role</p>
+        }
+    </div>
+</li>

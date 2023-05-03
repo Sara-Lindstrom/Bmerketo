@@ -1,0 +1,72 @@
+﻿.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.background {
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(250,239,239,1) 35%, rgba(255,255,255,1) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(250,239,239,1) 35%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(250,239,239,1) 35%, rgba(255,255,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
+    outline: 2px solid $color-theme-light;
+    outline-offset: 5px;
+
+    @include md {
+        height: 330px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-information {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        position: relative;
+
+
+        @include md {
+            display: block;
+            width: 600px;
+            margin: auto;
+        }
+
+        .img-frame {
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            overflow: hidden;
+            position: relative;
+
+            @include md {
+                width: 250px;
+                height: 250px;
+                shape-outside: circle(50%);
+                float: left;
+                margin: 20px;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .information {
+            text-align: center;
+
+            @include md {
+                text-align: left;
+                padding-top: 50px;
+            }
+        }
+    }
+}

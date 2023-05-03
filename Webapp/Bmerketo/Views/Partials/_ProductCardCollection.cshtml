@@ -1,0 +1,35 @@
+﻿@model List<CardModel>
+
+@{
+    string cardSize = (this.ViewData["CardSize"] as string) ?? "card-image-small";
+
+    bool showMorebool = false;
+
+    bool ShowMore()
+    {
+        showMorebool = !showMorebool;
+        return showMorebool;
+    }
+}
+
+
+<div class="collection">
+    @foreach (var card in Model.Take(8))
+    {
+        <partial name="/Views/Partials/_Card.cshtml" model="card" view-data="@ViewData" />
+    }
+</div>
+
+@if (Model.Count() > 8)
+{
+    <button class="show-btn light-button" id="showMoreButton">LOAD MORE <i class="fa-solid fa-arrow-rotate-right"></i></button>
+
+    <div class="d-none" id="bestCollectionSecond">
+        @foreach (var card in Model.Skip(8))
+        {
+            <partial name="/Views/Partials/_Card.cshtml" model="card" view-data="@ViewData" />
+        }
+    </div>
+
+    <script src="path/to/site.js"></script>
+}

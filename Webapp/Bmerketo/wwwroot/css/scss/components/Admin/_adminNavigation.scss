@@ -1,0 +1,28 @@
+﻿.admin-section {
+    margin-top: 40px;
+    text-align: center;
+
+    .navigation {
+        display: flex;
+        justify-content: space-evenly;
+
+        .section {
+            flex: 1;
+
+            .img {
+                font-size: 40px;
+                color: $color-gray-30;
+                margin: 20px auto;
+            }
+
+            .alternatives {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    padding: 20px 0 0 0;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 ﻿using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Bmerketo.Controllers
 {
@@ -23,6 +25,7 @@ namespace Bmerketo.Controllers
             return View(products);
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Register()
         {
             ViewData["Title"] = "Register Product";
@@ -30,32 +33,43 @@ namespace Bmerketo.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Register(ProductRegistrationViewModel productRegistrationViewModel)
+        public async Task<IActionResult> Register(ProductRegistrationViewModel ViewModel)
         {
             if (ModelState.IsValid)
             {
-                if(await _productServices.RegisterNewProduct(productRegistrationViewModel))
+                if(await _productServices.RegisterNewProduct(ViewModel))
                 {
                     return RedirectToAction("Index", "Products");
                 }
 
                 ModelState.AddModelError("", "Something went wrong and your Product could not be added");
             }
-            return View(productRegistrationViewModel);
+            return View(ViewModel);
         }
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(string id)
         {
             ViewData["Title"] = "Product Details";
 
-            var breadcrumb = new BreadcrumbViewModel
+            if(id is not "")
             {
-                Title = "SHOP",
-                Crumbs = new List<string> { "HOME", "PRODUCT", "DETAILS" },
-                ImageUrl = "images/placeholders/1920x300.svg"
-            };
 
-            return View(breadcrumb);
+                ProductDetailsViewModel model = new ProductDetailsViewModel
+                {
+                    Breadcrumb = new BreadcrumbViewModel
+                    {
+                        Title = "SHOP",
+                        Crumbs = new List<string> { "PRODUCTS", "DETAILS" }
+                    },
+                    Product = await _productServices.GetByIdAsync(id)
+                };
+
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Products");
+            }
         }
     }
 }

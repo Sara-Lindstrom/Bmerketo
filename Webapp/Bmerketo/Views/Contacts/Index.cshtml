@@ -2,11 +2,13 @@
 <partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model"/>
 
 <!-- Contact form -->
-<section class="contact-form">
-    <div class="contaciner form-container">
+<section class="formSection">
+    <div class="container form-container">
         <div class="title">Write something</div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <form novalidate>
+
+        <form class="contact-form" method="post" novalidate>
             <div class="name form-group">
                 <label for="name">Your Name*</label>
                 <input id="name" type="text"  required>

@@ -10,8 +10,6 @@ namespace Bmerketo.Contexts
 
         }
 
-        public DbSet<UserEntity> Users { get; set; }
-        public DbSet<AdressEntity> Adresses { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
     }
 }
