@@ -9,7 +9,10 @@ namespace Bmerketo.Models.Entities
     [PrimaryKey(nameof(ProductId), nameof(Category))]
     public class CategoryEntity
     {
+        [Required]
         public Guid ProductId { get; set; }
+
+        [Required]
         public ProductEntity Product { get; set; }
 
         [Required]
