@@ -1,5 +1,6 @@
 ﻿using Bmerketo.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Bmerketo.Controllers
 {
@@ -11,7 +12,6 @@ namespace Bmerketo.Controllers
             {
                 Title = "CONTACT",
                 Crumbs = new List<string> { "HOME", "CONTACT" },
-                ImageUrl = "images/placeholders/1920x300.svg"
             };
 
             return View(breadcrumb);

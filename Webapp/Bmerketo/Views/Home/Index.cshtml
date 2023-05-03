@@ -10,7 +10,6 @@
     bool ShowMore()
     {
         showMorebool = !showMorebool;
-        Debug.WriteLine("ShowMore method called. showMorebool = " + showMorebool);
         return showMorebool;
     }
 }
@@ -19,9 +18,9 @@
         <div class="container showcase">
             <div class="content">
                 <p class="ingress">WELCOME TO BMERKETO SHOP</p>
-                <h3 class="title">Exclusive Chair<br>Gold Collection.</h3>
-                <a asp-controller="products" asp-action="index" class="theme-button button">SHOP NOW</a>
-            </div>
+                <h3 class="showcase-title">Exclusive Chair<br>Gold Collection.</h3>
+                    <a asp-controller="products" asp-action="index" class="theme-button button">SHOP NOW</a>
+                </div>
 
             <div class="image">
                 <img class="img" src="/images/placeholders/625x647.svg">
@@ -29,40 +28,36 @@
         </div>
     </section>
     <!-- Showcase end -->
+    <!--Newest products collection-->
+    <section class="container bestselling">
+        @if (Model.NewestProducts.Count() != 0)
+        {
+            <h3 class="sectiontitle">Our Newest Products</h3>
+        }
+        <partial name="/Views/Partials/_ProductCardCollection.cshtml" model="@Model.NewestProducts" view-data="cardSizeSmall" />
+    </section>
+
+    <!--Newest products collection end-->
     <!-- Best Collection -->
     <section class="container bestselling">
-        <h3 class="sectiontitle">Best Collection</h3>
-        <ul class="categories">
-            <li class="category-item">All</li>
-            <li class="category-item">Bag</li>
-            <li class="category-item">Dress</li>
-            <li class="category-item">Decoration</li>
-            <li class="category-item">Essentials</li>
-            <li class="category-item">Interior</li>
-            <li class="category-item">Laptop</li>
-            <li class="category-item">Mobile</li>
-            <li class="category-item">Beaty</li>
-        </ul>
-
-        <div class="collection">
-            @foreach (var card in Model.BestCollectionCards.Take(8))
-            {
-                <partial name="/Views/Partials/_Card.cshtml" model="card" view-data='cardSizeSmall' />
-            }
-        </div>
-        @if (Model.BestCollectionCards.Count() > 8)
+        @if (Model.BestCollectionCards.Count() != 0)
         {
-            <button class="show-btn light-button" id="showMoreButton">LOAD MORE <i class="fa-solid fa-arrow-rotate-right"></i></button>
-            <div class="d-none" id="bestCollectionSecond">
-                @foreach (var card in Model.BestCollectionCards.Skip(8))
-                {
-                    <partial name="/Views/Partials/_Card.cshtml" model="card" view-data='cardSizeSmall' />
-                }
-            </div>
-
-            <script src="path/to/site.js"></script>
+            <h3 class="sectiontitle">Best Collection</h3>
+            <ul class="categories">
+                <li class="category-item">All</li>
+                <li class="category-item">Bag</li>
+                <li class="category-item">Dress</li>
+                <li class="category-item">Decoration</li>
+                <li class="category-item">Essentials</li>
+                <li class="category-item">Interior</li>
+                <li class="category-item">Laptop</li>
+                <li class="category-item">Mobile</li>
+                <li class="category-item">Beaty</li>
+            </ul>
         }
+        <partial name="/Views/Partials/_ProductCardCollection.cshtml" model="@Model.BestCollectionCards" view-data="cardSizeSmall" />
     </section>
+
     <!-- Best collection end -->
     <!-- Sale -->
     @if (Model.SaleBannerCards.Count() != 0)
@@ -84,16 +79,18 @@
                 </div>
 
                 <div class="sale-product">
-                    <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.Skip(1).First()" view-data='cardSizeLarge' />
+                    <partial name="/Views/Partials/_Card.cshtml" model="@Model.SaleBannerCards.Skip(1).Take(1).FirstOrDefault()" view-data='cardSizeLarge' />
                 </div>
             </div>
         </div>
     }
-
     <!-- sale end -->
     <!-- TopSelling -->
     <div class="topSelling">
+    @if(Model.TopSellers.Count() != 0)
+    {
         <h4 class="sectiontitle">Top Selling Products This Week</h4>
+    }
         <div class="topSelling-card-section">
 
             @foreach(CardModel card in Model.TopSellers)

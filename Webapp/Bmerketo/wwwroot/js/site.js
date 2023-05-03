@@ -54,3 +54,9 @@ window.onload = function () {
     });
 };
 
+
+function RedirectToDetailsPage() {
+    const id = document.querySelector('#detailId').value;
+    window.location.href = "/Products/Details?id="+ id;
+};
+

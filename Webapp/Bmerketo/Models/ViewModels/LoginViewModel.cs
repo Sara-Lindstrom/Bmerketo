@@ -14,5 +14,8 @@ namespace Bmerketo.Models.ViewModels
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
+
+        [Display(Name = "Please keep me logged in ")]
+        public bool KeepMeLoggedIn { get; set; } = false;
     }
 }

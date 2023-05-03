@@ -8,6 +8,5 @@
         public string ImageMimeType { get; set; } = null!;
         public decimal Price { get; set; }
         public decimal? DiscountPrice { get; set; }
-        public bool? BigCard { get; set; } = false;
     }
 }

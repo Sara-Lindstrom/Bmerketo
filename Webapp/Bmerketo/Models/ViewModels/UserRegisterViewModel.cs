@@ -1,11 +1,14 @@
 ﻿using Bmerketo.Extensions;
 using Bmerketo.Models.Entities;
 using Bmerketo.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.Net.NetworkInformation;
 
 namespace Bmerketo.Models.ViewModels
 {
-    public class RegisterViewModel
+    public class UserRegisterViewModel
     {
         [Required(ErrorMessage = "Your first name is required.")]
         [Display(Name = "First Name *")]
@@ -42,10 +45,14 @@ namespace Bmerketo.Models.ViewModels
         public string? CompanyName { get; set; }
 
 
+        [Display(Name = "Users Role (optional)")]
+        public string Role { get; set; }
+
+
         [Required(ErrorMessage = "Your email is required.")]
         [Display(Name = "Email *")]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage ="Please enter an valid email (Ex: Name@domain.com).")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage ="Please enter a valid email (Ex: Name@domain.com).")]
         public string Email { get; set; } = null!;
 
 
@@ -67,32 +74,44 @@ namespace Bmerketo.Models.ViewModels
         [ValidateFileExtension(new string[] { "jpeg", ".jpg", ".png", ".gif", ".bmp", ".tiff", ".webp", ".svg" }, errorMessage: "Please enter Image in svg format")]
         public IFormFile? ProfileImg { get; set; }
 
+        [Display(Name = "I have read and accepts the terms and agreements. *")]
+        [Required(ErrorMessage ="You must accept the terms and agreements to register.")]
+        public bool TermsAndAgreements { get; set; } = false;
 
-        public static implicit operator UserEntity(RegisterViewModel registerViewModel)
+
+
+        public static implicit operator IdentityUser (UserRegisterViewModel model)
         {
-            var _userEntity = new UserEntity
+            var _identityUser = new IdentityUser
             {
-                Id = Guid.NewGuid(),
-                Email = registerViewModel.Email,
-                FirstName = registerViewModel.FirstName,
-                LastName = registerViewModel.LastName,
-                PhoneNumber = registerViewModel.PhoneNumber,
-                CompanyName = registerViewModel.CompanyName,
-                ProfileImage = TypeConvertServices.ImageIFormateFileTobase64Convert(registerViewModel.ProfileImg)
+                UserName = model.Email,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+            };
+            return _identityUser;
+        }
+
+        public static implicit operator UserProfileEntity(UserRegisterViewModel model)
+        {
+            var _userEntity = new UserProfileEntity
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                CompanyName = model.CompanyName,
+                ProfileImage = TypeConvertServices.ImageIFormateFileTobase64Convert(model.ProfileImg)
             };
 
-            _userEntity.GenerateSecurePassword(registerViewModel.Password);
             return _userEntity;
         }
 
-        public static implicit operator AdressEntity(RegisterViewModel registerViewModel)
+        public static implicit operator AdressEntity(UserRegisterViewModel model)
         {
             return new AdressEntity
             {
                 Id = Guid.NewGuid(),
-                StreetName = registerViewModel.StreetName,
-                PostalCode = registerViewModel.PostalCode,
-                City = registerViewModel.City
+                StreetName = model.StreetName,
+                PostalCode = model.PostalCode,
+                City = model.City
             };
         }
     }

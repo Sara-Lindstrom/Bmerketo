@@ -1,26 +1,26 @@
-﻿@model BreadcrumbViewModel
-@{
-    var cardSizeSmall = new ViewDataDictionary(ViewData) { { "CardSize", "card-image-small" } };
-}
+﻿@model ProductDetailsViewModel
 
-<partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model"/>
+@{
+    int i = 0;
+}
+<partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model.Breadcrumb"/>
 
 <!-- product specifications -->
 <div class="container product-spec">
     <div class="image-container">
-        <img class="large-image" src="./images/placeholders/501x430.svg" alt="">
+        <img class="large-image" src="@($"data:{Model.Product.ProductImages.PrimaryImageMimeType};base64,{Model.Product.ProductImages.PrimaryImageData}")" alt="">
 
         <div class="small-image-container">
-            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
-            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
-            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
-            <img class="small-image" src="./images/placeholders/120x113.svg" alt="">
+            <img class="small-image" src="@($"data:{Model.Product.ProductImages.ImageOneMimeType};base64,{Model.Product.ProductImages.ImageDataOne}")" alt="">
+            <img class="small-image" src="@($"data:{Model.Product.ProductImages.ImageTwoMimeType};base64,{Model.Product.ProductImages.ImageDatatwo}")" alt="">
+            <img class="small-image" src="@($"data:{Model.Product.ProductImages.ImagethreeMimeType};base64,{Model.Product.ProductImages.ImageDatathree}")" alt="">
+            <img class="small-image" src="@($"data:{Model.Product.ProductImages.ImageFourMimeType};base64,{Model.Product.ProductImages.ImageDatafour}")" alt="">
         </div>
     </div>
 
     <div class="product-specifications">
-        <h6 class="product-name">Young Star Smart Shoe in Fashion</h6>
-        <p class="product-description">Lirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <h6 class="product-name">@Model.Product.Product.Title</h6>
+        <p class="product-description">@Model.Product.Product.Description</p>
 
         <hr class="hr">
 
@@ -28,17 +28,31 @@
         <div class="product-form">
             <div class="product-rating">
                 <div class="star-rating">
-                    <i class="fa-solid fa-star star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                    @for(i = 0; i<Model.Product.Product.Review; i++)
+                    {
+                        <i class="fa-solid fa-star"></i>
+                    }
+                    @if (i < 5)
+                    {
+                        @for (int rest = i; rest < 5; rest++)
+                        {
+                            <i class="fa-regular fa-star"></i>
+                        }
+                    }
                 </div>
 
                 <a href="#" class="ratings">16 Ratings</a>
             </div>
 
-            <p class="price">$30</p>
+            @if (Model.Product.Product.DiscountPrice is not null)
+            {
+                <p class="price">@Model.Product.Product.DiscountPrice</p>
+                <p class="old-price">@Model.Product.Product.Price</p>
+            }
+            else
+            {
+                <p class="price">@Model.Product.Product.Price</p>
+            }
 
             <div class="add-amount">
                 <div class="counter">
@@ -59,7 +73,7 @@
 
             <button class="light-button whishlist-btn">Add To Whishlist</button>
 
-            <p class="product-category">Category : Table Lamp, Lamp</p>
+            <p class="product-category">Category : @Model.Product.Product.Category , @if (Model.Product.Product.IsNew == true) { <span>New</span> }</p>
         </div>
     </div>
 </div>
@@ -95,7 +109,7 @@
             </p>
 
             <div class="img-container">
-                <img class="tabimage" src="./images/placeholders/469x356.svg" alt="">
+                <img class="tabimage" src="~/images/placeholders/469x356.svg" alt="">
             </div>
         </div>
     </div>
@@ -106,16 +120,18 @@
 </div>
 <!-- Information tabs end -->
 <!-- Related Products -->
-<div class="container related">
+@*<div class="container related">
     <h4 class="relatedTitle">Related Products</h4>
 
     <div class="cardcontainer">
+        <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+
         <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
         <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
         <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
         <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
 
     </div>
-</div>
+</div>*@
 <!-- Related Products end -->
 

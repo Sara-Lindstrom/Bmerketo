@@ -1,55 +1,40 @@
-﻿using Bmerketo.Contexts;
-using Bmerketo.Models.Entities;
-using Bmerketo.Models.Enums;
-using Bmerketo.Models.ViewModels;
+﻿using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using static Bmerketo.Models.Enums.RegisterEnumModel;
 using static Bmerketo.Models.Enums.LoginEnumModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Bmerketo.Models;
+using System.Linq;
 
 namespace Bmerketo.Controllers
 {
     public class AccountsController : Controller
     {
         private readonly AccountServices _service;
+        private readonly UserService _userService;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountsController(AccountServices service)
+        public AccountsController(UserService userService, AccountServices service, SignInManager<IdentityUser> signInManager)
         {
+            _userService = userService;
             _service = service;
+            _signInManager = signInManager;
         }
 
-        //Login
-        public IActionResult Login()
+        //My Account
+        [Authorize]
+        public async Task<IActionResult> Index()
         {
-            ViewData["Title"] = "Login";
-            return View();
-        }
+            ViewData["Title"] = "My Page";
 
-        [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel loginViewModel)
-        {
-            ViewData["Title"] = "Login";
-
-            if (ModelState.IsValid)
+            AccountIndexViewModel model = new AccountIndexViewModel
             {
-                var returnKey = await _service.LoginToAccountAsync(loginViewModel);
+                ProfileInformation = await _userService.GetIdentityProfileAsync(User.Identity.Name)
+            };
 
-                if(returnKey == LoginResponseEnum.Success)
-                {
-                    return RedirectToAction("Index", "Account");
-                }
-                else if(returnKey == LoginResponseEnum.Wrong)
-                {
-                    ModelState.AddModelError("", "Inaccurate email or password.");
-                }
-                else if(returnKey == LoginResponseEnum.Failed)
-                {
-                    ModelState.AddModelError("", "Oops, we can't log you in right now, please try again later!");
-                }
-            }
-
-            return View(loginViewModel);
+            return View(model);
         }
 
         //Register
@@ -61,17 +46,17 @@ namespace Bmerketo.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterAsync(RegisterViewModel registerViewModel)
+        public async Task<IActionResult> RegisterAsync(UserRegisterViewModel ViewModel)
         {
             ViewData["Title"] = "Register";
 
             if (ModelState.IsValid)
             {
-                var returnedKey = await _service.RegisterNewAccountAsync(registerViewModel);
+                var returnedKey = await _service.RegisterNewAccountAsync(ViewModel);
 
                 if (returnedKey == ResponseEnum.Success)
                 {
-                    return RedirectToAction("Login", "accounts");
+                    return RedirectToAction("login", "accounts");
                 }
                 else if (returnedKey == ResponseEnum.EmailExists)
                 {
@@ -83,13 +68,61 @@ namespace Bmerketo.Controllers
                 }
             }
 
-            return View(registerViewModel);
+            return View(ViewModel);
         }
 
-        //My Account
-        public IActionResult Index()
+
+        //Login
+        public IActionResult Login()
         {
+            ViewData["Title"] = "Login";
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> LoginAsync(LoginViewModel ViewModel)
+        {
+            ViewData["Title"] = "Login";
+
+            if (ModelState.IsValid)
+            {
+                var returnKey = await _service.LoginToAccountAsync(ViewModel);
+                var user = await _userService.GetIdentityProfileAsync(ViewModel.Email);
+
+                if (returnKey == LoginResponseEnum.Success)
+                {
+                    if (user.Roles.Contains("admin"))
+                    {
+                        return RedirectToAction("index", "admin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "accounts");
+                    }
+
+                }
+                else if (returnKey == LoginResponseEnum.Wrong)
+                {
+                    ModelState.AddModelError("", "Inaccurate email or password.");
+                }
+                else if (returnKey == LoginResponseEnum.Failed)
+                {
+                    ModelState.AddModelError("", "Oops, we can't log you in right now, please try again later!");
+                }
+            }
+
+            return View(ViewModel);
+        }
+
+        //Logout
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            if (await _service.LogoutAsync(User))
+                return LocalRedirect("/");
+
+            return RedirectToAction("index");
+        }
+
     }
 }

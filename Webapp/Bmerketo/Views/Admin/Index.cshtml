@@ -1,0 +1,27 @@
+﻿@model AdminIndexViewModel
+
+<partial name="/Views/Partials/_ProfileInformation.cshtml" model="@Model.ProfileInformation"/>
+
+
+<div class="admin-section container">
+    <h5>What Do You Whant To Do?</h5>
+
+    <nav class="navigation">
+        <section class="section">
+            <i class="img fa-solid fa-user"></i>
+
+            <ul class="alternatives">
+                <li><a asp-controller="accounts" asp-action="register" class="list">Add User</a></li>
+                <li><a asp-controller="admin" asp-action="userAdministration" class="list">All Users</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <i class="img fa-solid fa-tag"></i>
+
+            <ul class="alternatives">
+                <li><a asp-controller="products" asp-action="register" class="list">Add Products</a></li>
+            </ul>
+        </section>
+    </nav>
+</div>

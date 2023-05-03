@@ -11,6 +11,8 @@
 @import "./components/general/footer";
 @import "./components/general/header";
 @import "./components/general/card";
+@import "./components/general/profileInformation.scss";
+@import "./components/general/_userCard.scss";
 
 //home
 @import "./components/home/showcase";
@@ -38,3 +40,9 @@
 
 //login
 @import "./components/login/loginform";
+
+//Account
+
+//Admin
+@import "./components/Admin/adminNavigation.scss";
+@import "./components/Admin/_userAdmin.scss";

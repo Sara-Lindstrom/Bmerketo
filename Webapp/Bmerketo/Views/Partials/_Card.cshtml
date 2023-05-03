@@ -1,27 +1,33 @@
 ﻿@model CardModel
 
 @{
-    string cardSize = this.ViewData["CardSize"]?.ToString() ?? "card-image-small";
+    string cardSize = (ViewData["CardSize"] as string) ?? "card-image-small";
 }
 
-<div class="@cardSize card">
-    <button class="card-link">
-        <img class="image" alt="" src="@($"data:{Model.ImageMimeType};base64,{Model.ImageUrl}")">
+@if(Model is not null)
+{
+    <div class="@cardSize card">
+        <button class="card-link" id="detailId" value="@Model.Id.ToString()" onclick="RedirectToDetailsPage()">
+            <img class="image" alt="" src="@($"data:{Model.ImageMimeType};base64,{Model.ImageUrl}")">
 
-        <div class="card-information">
-            <h6 class="card-title">@Model.Title</h6>
-            <div class="card-price">
-            @if (Model.DiscountPrice != null)
-            {
-                <p class="price">$@Model.DiscountPrice</p>
-                <p class="old-price">$@Model.Price</p>
-            }
-            else
-            {
-                <p class="price">$@Model.Price</p>
-            }
+            <div class="card-information">
+                <h6 class="card-title">@Model.Title</h6>
+                <div class="card-price">
+                    @if (Model.DiscountPrice != null)
+                    {
+                        <p class="price">$@Model.DiscountPrice</p>
+                        <p class="old-price">$@Model.Price</p>
+                    }
+                    else
+                    {
+                        <p class="price">$@Model.Price</p>
+                    }
+                </div>
+                <a href="#" class="to-cart"><i class="fa-light fa-cart-arrow-down"></i></a>
             </div>
-            <a href="#" class="to-cart"><i class="fa-light fa-cart-arrow-down"></i></a>
-        </div>
-    </button>
-</div>
+        </button>
+    </div>
+}
+
+<script src="path/to/site.js"></script>
+

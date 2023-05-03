@@ -1,5 +1,4 @@
-﻿using Bmerketo.Models.Enums;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +9,10 @@ namespace Bmerketo.Models.Entities
         [Key]
         [Column(TypeName = "uniqueidentifier")]
         public Guid Id { get; set; }
+
+        [Required]
+        [Column(TypeName = "datetime2")]
+        public DateTime CreatedDate { get; set; }
 
         [Required]
         [Column(TypeName = "nvarchar(100)")]
@@ -29,9 +32,11 @@ namespace Bmerketo.Models.Entities
         [Column(TypeName = "money")]
         public decimal? DiscountPrice { get; set; }
 
+        public ICollection<CategoryEntity>? Category { get; set; } = new HashSet<CategoryEntity>();
+
         [Required]
-        [Column(TypeName = "tinyint")]
-        public CategoryEnumModel.CategoryAlternativeEnum Category { get; set; }
+        [Column(TypeName ="bit")]
+        public bool IsNew { get; set; }
 
         [Required]
         public ProductImageEntity ProductImageData { get; set; }

@@ -1,0 +1,25 @@
+﻿.allUsers {
+    margin-top: 40px;
+    text-align: center;
+
+    .navigation {
+
+        @include md {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .section {
+            flex: 1;
+
+            .alternatives {
+                list-style: none;
+                padding: 0;
+                
+                @include md{
+                    padding: 20px;
+                }
+            }
+        }
+    }
+}

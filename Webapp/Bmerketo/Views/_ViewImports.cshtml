@@ -2,3 +2,8 @@
 @using Bmerketo.Models.ViewModels;
 @using Bmerketo.Models;
 @using Bmerketo.Models.Enums;
+
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signinManager
+@inject UserManager<IdentityUser> userManager
+@inject RoleManager<IdentityRole> roleManager

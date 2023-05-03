@@ -8,59 +8,83 @@ using System.Runtime.CompilerServices;
 using static Bmerketo.Models.Enums.RegisterEnumModel;
 using static Bmerketo.Models.Enums.LoginEnumModel;
 using System.Linq.Expressions;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Data;
+using Bmerketo.Models;
 
 namespace Bmerketo.Services
 {
     public class AccountServices
     {
-        private readonly DataContext _context;
+        private readonly IdentityContext _identityContext;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        public readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountServices(DataContext context)
+        public AccountServices(IdentityContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
-            _context = context;
+            _identityContext = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
-        public async Task<UserEntity?> GetUserByEmailAsync(string email)
-        {
-            var _userFromDb = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-            return _userFromDb;
-        }
 
-        public async Task<ResponseEnum> RegisterNewAccountAsync(RegisterViewModel registerViewModel)
+        public async Task<ResponseEnum> RegisterNewAccountAsync(UserRegisterViewModel model)
         {
+
             try
             {
-                //converts from registration to entities. 
-                UserEntity userEntity = registerViewModel;
-                AdressEntity adressEntity = registerViewModel;
 
-                //create Address
-                var _adressFromDB = await _context.Adresses.FirstOrDefaultAsync(x => x.StreetName == adressEntity.StreetName && x.PostalCode == adressEntity.PostalCode && x.City == adressEntity.City);
-                var _userFromDB = await GetUserByEmailAsync(userEntity.Email);
+                IdentityUser identityUser = model;
 
-                if (_userFromDB is null)
+                if ((await _userManager.CreateAsync(identityUser, model.Password)).Succeeded)
                 {
-                    if (_adressFromDB is null)
+                    //Add role if not admin
+                    if (await _userManager.Users.CountAsync() == 1)
                     {
-                        userEntity.AdressId = adressEntity.Id;
-
-                        _context.Adresses.Add(adressEntity);
-                        _context.Users.Add(userEntity);
-                        await _context.SaveChangesAsync();
+                        await _userManager.AddToRoleAsync(identityUser, "admin");
                     }
                     else
                     {
-                        userEntity.AdressId = _adressFromDB.Id;
+                        //Add role if admin
+                        var role = await _roleManager.FindByIdAsync(model.Role);
+                        await _userManager.AddToRoleAsync(identityUser, role.Name);
+                    }
+
+                    //converts from registration to entities. 
+                    UserProfileEntity userProfileEntity = model;
+                    userProfileEntity.Id = identityUser.Id;
+
+                    AdressEntity adressEntity = model;
+
+                    //create Address
+                    var _adressFromDB = await _identityContext.Adresses.FirstOrDefaultAsync(x => x.StreetName == adressEntity.StreetName && x.PostalCode == adressEntity.PostalCode && x.City == adressEntity.City);
+
+
+                    if (_adressFromDB is null)
+                    {
+                        userProfileEntity.AdressId = adressEntity.Id;
+
+                        _identityContext.Adresses.Add(adressEntity);
+                        _identityContext.UserProfiles.Add(userProfileEntity);
+                        await _identityContext.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        userProfileEntity.AdressId = _adressFromDB.Id;
 
                         //Create User
-                        _context.Users.Add(userEntity);
-                        await _context.SaveChangesAsync();
+                        _identityContext.UserProfiles.Add(userProfileEntity);
+                        await _identityContext.SaveChangesAsync();
+
                     }
 
                     return ResponseEnum.Success;
+                }
 
-                }  
-                
                 return ResponseEnum.EmailExists;
 
             }
@@ -70,22 +94,27 @@ namespace Bmerketo.Services
             }
         }
 
-        public async Task<LoginResponseEnum> LoginToAccountAsync(LoginViewModel loginViewModel)
+        public async Task<LoginResponseEnum> LoginToAccountAsync(LoginViewModel model)
         {
             try
             {
-                var _userFromDb = await GetUserByEmailAsync(loginViewModel.Email);
-
-                if (_userFromDb is not null)
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.KeepMeLoggedIn, false);
+                
+                if (result.Succeeded)
                 {
-                    if (_userFromDb.VerifySecurePassword(loginViewModel.Password))
-                    {
-                        return LoginResponseEnum.Success;
-                    }
+                    return LoginResponseEnum.Success;
                 }
+
                 return LoginResponseEnum.Wrong;
             }
             catch { return LoginResponseEnum.Failed; }
+        }
+
+        public async Task<bool> LogoutAsync(ClaimsPrincipal user)
+        {
+            await _signInManager.SignOutAsync();
+
+            return _signInManager.IsSignedIn(user);
         }
     }
 }
