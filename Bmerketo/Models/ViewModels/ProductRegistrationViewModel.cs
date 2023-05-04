@@ -10,7 +10,7 @@ public class ProductRegistrationViewModel
 {
     public CategoryAlternativeEnum categoryAlternativeEnum;
 
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "Product title is required")]
     [Display(Name = "Product Title *")]
@@ -36,7 +36,7 @@ public class ProductRegistrationViewModel
 
     [Required(ErrorMessage = "Category is required")]
     [Display(Name = "Category *")]
-    public CategoryAlternativeEnum Category { get; set; }
+    public List<CategoryAlternativeEnum> Categories { get; set; }
 
     [Required(ErrorMessage = "Primary image for the product is required")]
     [Display(Name = "Product primary Image *")]
@@ -68,13 +68,12 @@ public class ProductRegistrationViewModel
     {
         return new ProductEntity
         {
-            Id = Guid.NewGuid(),
+            Id = registrationViewModel.Id,
             Title = registrationViewModel.Title,
             Description = registrationViewModel.Description,
             Review = registrationViewModel.Review,
             Price = Convert.ToDecimal(registrationViewModel.Price),
             DiscountPrice = registrationViewModel.DiscountPrice,
-            Category = registrationViewModel.Category,
             ProductImageData = new ProductImageEntity
             {
                 Id = Guid.NewGuid(),
@@ -90,5 +89,22 @@ public class ProductRegistrationViewModel
                 ImageFourMimeType= registrationViewModel.ImageFour.ContentType,
             }
         };
+    }
+
+    public static implicit operator List<CategoryEntity>(ProductRegistrationViewModel registrationViewModel)
+    {
+        var result = new List<CategoryEntity>();
+
+        foreach (var category in registrationViewModel.Categories)
+        {
+            var item = new CategoryEntity
+            {
+                ProductId = registrationViewModel.Id,
+                Category = category
+            };
+
+            result.Add(item);
+        }
+        return result;
     }
 }

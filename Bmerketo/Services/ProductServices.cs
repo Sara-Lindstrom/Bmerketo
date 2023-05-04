@@ -55,19 +55,37 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                products.Add(item);
+            }
 
             return products;
         }
 
         public async Task<IEnumerable<CardModel>> GetByCategoryAsync(CategoryAlternativeEnum category)
         {
-            var items = await _context.Products
+
+            var items = await _context.Categories
                 .Where(x => x.Category == category)
-                .Include(p=> p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                var product = await _context.Products
+                    .Where(p => p.Id == item.ProductId)
+                    .Include(p => p.ProductImageData)
+                    .FirstOrDefaultAsync();
+
+                if(product != null)
+                {
+                    products.Add(product);
+                }
+            }
 
             return products;
 
@@ -101,7 +119,13 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                products.Add(item);
+            }
+
             return products;
         }
 
@@ -113,31 +137,13 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
-            return products;
-
-        }
-
-        private IEnumerable<CardModel> ProductEntityToCardModel(List<ProductEntity> items)
-        {
             var products = new List<CardModel>();
 
-            if (items.Count != 0)
+            foreach (var item in items)
             {
-                foreach (var item in items)
-                {
-                    var productCard = new CardModel
-                    {
-                        Id = item.Id,
-                        Title = item.Title,
-                        ImageUrl = item.ProductImageData.PrimaryImageData,
-                        ImageMimeType = item.ProductImageData.PrimaryImageMimeType,
-                        Price = item.Price,
-                        DiscountPrice = item.DiscountPrice,
-                    };
-                    products.Add(productCard);
-                }
+                products.Add(item);
             }
+
             return products;
 
         }

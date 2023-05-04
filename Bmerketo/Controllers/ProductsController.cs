@@ -1,8 +1,10 @@
-﻿using Bmerketo.Models.ViewModels;
+﻿
+using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using static Bmerketo.Models.Enums.CategoryEnumModel;
 
 namespace Bmerketo.Controllers
 {
@@ -30,6 +32,15 @@ namespace Bmerketo.Controllers
         {
             ViewData["Title"] = "Register Product";
 
+            ViewBag.Categories = Enum.GetValues(typeof(CategoryAlternativeEnum))
+                                    .Cast<CategoryAlternativeEnum>()
+                                    .ToList()
+                                    .Select(v => new SelectListItem
+                                    {
+                                        Text = v.ToString(),
+                                        Value = v.ToString()
+                                    });
+
             return View();
         }
         [HttpPost]
@@ -44,6 +55,11 @@ namespace Bmerketo.Controllers
 
                 ModelState.AddModelError("", "Something went wrong and your Product could not be added");
             }
+
+            ViewBag.Categories = Enum.GetValues(typeof(CategoryAlternativeEnum))
+                                    .Cast<CategoryAlternativeEnum>()
+                                    .ToList();
+
             return View(ViewModel);
         }
 

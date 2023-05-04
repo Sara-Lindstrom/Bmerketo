@@ -32,7 +32,7 @@ namespace Bmerketo.Models.Entities
         [Column(TypeName = "money")]
         public decimal? DiscountPrice { get; set; }
 
-        public ICollection<CategoryEntity>? Category { get; set; } = new HashSet<CategoryEntity>();
+        public ICollection<CategoryEntity>? Categories { get; set; }
 
         [Required]
         [Column(TypeName ="bit")]

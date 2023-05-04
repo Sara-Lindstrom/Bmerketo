@@ -14,6 +14,7 @@ namespace Bmerketo.Factories
             _userService = userService;
         }
 
+        //Got hint From Elin in my class on what to google to get this info
         protected override async Task<ClaimsIdentity> GenerateClaimsAsync(IdentityUser user)
         {
             var claimIdentity = await base.GenerateClaimsAsync(user);

@@ -60,3 +60,4 @@ function RedirectToDetailsPage() {
     window.location.href = "/Products/Details?id="+ id;
 };
 
+

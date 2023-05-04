@@ -1,5 +1,10 @@
 ﻿@model ProductRegistrationViewModel
 
+@{
+    var test = new[] { "test", "test2" };
+    List<string> testlist = new List<string>();
+}
+
 <section class="formSection">
     <div class="container form-container">
         <div class="title">Please Register your new Product</div>
@@ -18,12 +23,13 @@
                 <input asp-for="Price" class="invalid">
                 <span asp-validation-for="Price" class="error"></span>
             </div>
-            <div class="Category form-group">
-                <label asp-for="Category"></label>
-                <select asp-for="Category" class="invalid" asp-items="Html.GetEnumSelectList<CategoryEnumModel.CategoryAlternativeEnum>()">
-                    <option value="" selected disabled hidden>Choose category</option>
+            <div class="Categories form-group">
+                <label asp-for="Categories"></label>
+                <select asp-for="Categories" id="categoriesSelect" class="invalid" asp-items="Html.GetEnumSelectList<CategoryEnumModel.CategoryAlternativeEnum>()" multiple>
                 </select>
-                <span asp-validation-for="Category" class="error"></span>
+                <span asp-validation-for="Categories" class="error"></span>
+                @*@Html.ListBoxFor(model => model.Categories, new MultiSelectList(ViewBag.Categories, "Value", "Text", Model.Categories.Select(x => x.Text)), new { @class = "form-control features-segments select2-multiselect-checkbox", multiple = "multiple" })*@
+
             </div>
             <div class="DiscountPrice form-group">
                 <label asp-for="DiscountPrice"></label>
@@ -71,3 +77,5 @@
         </form>
     </div>
 </section>
+
+<script src="~/js/site.js"></script>
