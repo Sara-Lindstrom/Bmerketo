@@ -1,4 +1,6 @@
-﻿namespace Bmerketo.Models.ViewModels
+﻿using Bmerketo.Models.Entities;
+
+namespace Bmerketo.Models.ViewModels
 {
     public class ProductDetailsViewModel
     {

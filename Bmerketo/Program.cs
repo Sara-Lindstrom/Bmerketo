@@ -29,6 +29,7 @@ builder.Services.ConfigureApplicationCookie(x =>
 
 builder.Services.AddScoped<AccountServices>();
 builder.Services.AddScoped<ProductServices>();
+builder.Services.AddScoped<CategoriesService>();
 builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();

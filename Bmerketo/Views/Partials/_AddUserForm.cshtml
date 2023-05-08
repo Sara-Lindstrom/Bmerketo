@@ -3,7 +3,7 @@
 @{
     List<SelectListItem> _roles = new List<SelectListItem>();
     string password = "";
-    bool termsAndAgreements = false;
+
 
     if(signinManager.IsSignedIn(User) && User.IsInRole("admin"))
     {
@@ -22,7 +22,6 @@
         }
 
         password = "BytMig123!";
-        termsAndAgreements = true;
 
     }
 }
@@ -101,14 +100,12 @@
                         <input asp-for="ConfirmPassword" value=@password>
                         <span asp-validation-for="ConfirmPassword" class="error"></span>
                     </div>
-                    <div class="terms form-group">
-                        <div class="form-checkbox-group">
-                            <label class="custom-checkbox">
-                                <label asp-for="TermsAndAgreements"></label>
-                                <input asp-for="TermsAndAgreements" value=@termsAndAgreements>
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
+                    <div class="terms form-checkbox-group">
+                        <label class="custom-checkbox">
+                            <label asp-for="TermsAndAgreements"></label>
+                            <input asp-for="TermsAndAgreements">
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
                 </div>
             }
@@ -124,14 +121,12 @@
                     <input asp-for="ConfirmPassword" value=@password>
                     <span asp-validation-for="ConfirmPassword" class="error"></span>
                 </div>
-                <div class="terms form-group">
-                    <div class="form-checkbox-group">
-                        <label class="custom-checkbox">
-                            <label asp-for="TermsAndAgreements"></label>
-                            <input asp-for="TermsAndAgreements" value=@termsAndAgreements>
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
+                <div class="terms form-checkbox-group">
+                    <label class="custom-checkbox">
+                        <label asp-for="TermsAndAgreements"></label>
+                        <input asp-for="TermsAndAgreements">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
             }
 

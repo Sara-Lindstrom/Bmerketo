@@ -27,8 +27,10 @@
     <div class="d-none" id="bestCollectionSecond">
         @foreach (var card in Model.Skip(8))
         {
+
             <partial name="/Views/Partials/_Card.cshtml" model="card" view-data="@ViewData" />
         }
+
     </div>
 
     <script src="path/to/site.js"></script>

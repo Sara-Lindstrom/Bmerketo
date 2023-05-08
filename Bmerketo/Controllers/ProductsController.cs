@@ -1,9 +1,11 @@
 ﻿
+using Bmerketo.Models.Enums;
 using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
 using static Bmerketo.Models.Enums.CategoryEnumModel;
 
 namespace Bmerketo.Controllers
@@ -11,10 +13,12 @@ namespace Bmerketo.Controllers
     public class ProductsController : Controller
     {
         private readonly ProductServices _productServices;
+        private readonly CategoriesService _categoriesService;
 
-        public ProductsController(ProductServices productServices)
+        public ProductsController(ProductServices productServices, CategoriesService categoriesService)
         {
             _productServices = productServices;
+            _categoriesService = categoriesService;
         }
 
 
@@ -32,33 +36,25 @@ namespace Bmerketo.Controllers
         {
             ViewData["Title"] = "Register Product";
 
-            ViewBag.Categories = Enum.GetValues(typeof(CategoryAlternativeEnum))
-                                    .Cast<CategoryAlternativeEnum>()
-                                    .ToList()
-                                    .Select(v => new SelectListItem
-                                    {
-                                        Text = v.ToString(),
-                                        Value = v.ToString()
-                                    });
+            ViewBag.Categories = _categoriesService.GetCategorySelectListItems();
 
-            return View();
+            var viewModel = new ProductRegistrationViewModel();
+            return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> Register(ProductRegistrationViewModel ViewModel)
+        public async Task<IActionResult> Register(ProductRegistrationViewModel ViewModel, string[] tags)
         {
+            ViewBag.Categories = _categoriesService.GetCategorySelectListItems(tags);
+
             if (ModelState.IsValid)
             {
-                if(await _productServices.RegisterNewProduct(ViewModel))
+                if(await _productServices.RegisterNewProduct(ViewModel, tags))
                 {
                     return RedirectToAction("Index", "Products");
                 }
 
                 ModelState.AddModelError("", "Something went wrong and your Product could not be added");
             }
-
-            ViewBag.Categories = Enum.GetValues(typeof(CategoryAlternativeEnum))
-                                    .Cast<CategoryAlternativeEnum>()
-                                    .ToList();
 
             return View(ViewModel);
         }

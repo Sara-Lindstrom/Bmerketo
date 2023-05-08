@@ -50,6 +50,11 @@ namespace Bmerketo.Controllers
         {
             ViewData["Title"] = "Register";
 
+            if (User.IsInRole("admin"))
+            {
+                ViewModel.TermsAndAgreements = true;
+            }
+
             if (ModelState.IsValid)
             {
                 var returnedKey = await _service.RegisterNewAccountAsync(ViewModel);
@@ -89,7 +94,7 @@ namespace Bmerketo.Controllers
                 var returnKey = await _service.LoginToAccountAsync(ViewModel);
                 var user = await _userService.GetIdentityProfileAsync(ViewModel.Email);
 
-                if (returnKey == LoginResponseEnum.Success)
+                if (returnKey == LoginResponseEnum.Success && user != null)
                 {
                     if (user.Roles.Contains("admin"))
                     {
@@ -101,7 +106,7 @@ namespace Bmerketo.Controllers
                     }
 
                 }
-                else if (returnKey == LoginResponseEnum.Wrong)
+                else if (returnKey == LoginResponseEnum.Wrong || user == null)
                 {
                     ModelState.AddModelError("", "Inaccurate email or password.");
                 }

@@ -1,10 +1,5 @@
 ﻿@model ProductRegistrationViewModel
 
-@{
-    var test = new[] { "test", "test2" };
-    List<string> testlist = new List<string>();
-}
-
 <section class="formSection">
     <div class="container form-container">
         <div class="title">Please Register your new Product</div>
@@ -24,12 +19,37 @@
                 <span asp-validation-for="Price" class="error"></span>
             </div>
             <div class="Categories form-group">
-                <label asp-for="Categories"></label>
-                <select asp-for="Categories" id="categoriesSelect" class="invalid" asp-items="Html.GetEnumSelectList<CategoryEnumModel.CategoryAlternativeEnum>()" multiple>
-                </select>
-                <span asp-validation-for="Categories" class="error"></span>
-                @*@Html.ListBoxFor(model => model.Categories, new MultiSelectList(ViewBag.Categories, "Value", "Text", Model.Categories.Select(x => x.Text)), new { @class = "form-control features-segments select2-multiselect-checkbox", multiple = "multiple" })*@
 
+                @*<span asp-validation-for="Categories" class="error"></span>*@
+
+
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="categoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Categories
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                    @foreach (SelectListItem categoryAlternative in ViewBag.Categories)
+                    {
+                        <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="tags" value="@categoryAlternative.Value" id="category-@categoryAlternative.Text-@categoryAlternative.Value" checked="@categoryAlternative.Selected">
+                                <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
+                        </div>
+                    }
+                  </div>
+                </div>
+
+                <script type="text/javascript">
+                    const dropdownButton = document.getElementById("categoriesDropdown");
+                    const dropdownMenu = document.querySelector(".dropdown-menu");
+                    const checkboxes = document.querySelectorAll(".form-check-input");
+                    const categoriesInput = document.querySelector('input[name="Categories"]');
+                    const selectedCategories = [];
+
+                    dropdownButton.addEventListener("click", () => {
+                        console.log("dropdown click");
+                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+                    });
+                </script>
             </div>
             <div class="DiscountPrice form-group">
                 <label asp-for="DiscountPrice"></label>

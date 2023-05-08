@@ -8,7 +8,6 @@ namespace Bmerketo.Models.ViewModels;
 
 public class ProductRegistrationViewModel
 {
-    public CategoryAlternativeEnum categoryAlternativeEnum;
 
     public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -33,10 +32,6 @@ public class ProductRegistrationViewModel
     [DataType(DataType.Currency)]
     [RegularExpression(@"^\d{1,8}(\.\d{1,2})?$", ErrorMessage = "Please enter a valid discounted price")]
     public decimal? DiscountPrice { get; set; }
-
-    [Required(ErrorMessage = "Category is required")]
-    [Display(Name = "Category *")]
-    public List<CategoryAlternativeEnum> Categories { get; set; }
 
     [Required(ErrorMessage = "Primary image for the product is required")]
     [Display(Name = "Product primary Image *")]
@@ -89,22 +84,5 @@ public class ProductRegistrationViewModel
                 ImageFourMimeType= registrationViewModel.ImageFour.ContentType,
             }
         };
-    }
-
-    public static implicit operator List<CategoryEntity>(ProductRegistrationViewModel registrationViewModel)
-    {
-        var result = new List<CategoryEntity>();
-
-        foreach (var category in registrationViewModel.Categories)
-        {
-            var item = new CategoryEntity
-            {
-                ProductId = registrationViewModel.Id,
-                Category = category
-            };
-
-            result.Add(item);
-        }
-        return result;
     }
 }
