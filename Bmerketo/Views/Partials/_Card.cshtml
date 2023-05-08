@@ -7,7 +7,7 @@
 @if(Model is not null)
 {
     <div class="@cardSize card">
-        <button class="card-link" id="detailId" value="@Model.Id.ToString()" onclick="RedirectToDetailsPage()">
+        <button class="card-link" value="@Model.Id.ToString()" onclick="RedirectToDetailsPage(this)">
             <img class="image" alt="" src="@($"data:{Model.ImageMimeType};base64,{Model.ImageUrl}")">
 
             <div class="card-information">
@@ -29,5 +29,5 @@
     </div>
 }
 
-<script src="path/to/site.js"></script>
+<script src="./js/site.js"></script>
 

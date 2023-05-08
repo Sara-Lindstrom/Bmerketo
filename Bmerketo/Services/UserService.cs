@@ -26,18 +26,23 @@ namespace Bmerketo.Services
 
         public async Task<IdentityProfileModel> GetIdentityProfileAsync(string email)
         {
-            var _user = await _userManager.FindByNameAsync(email);
-            var _profile = await GetUserProfileAsync(_user.Id);
-            var _roles = await _userManager.GetRolesAsync(_user);
-
-            IdentityProfileModel profile = new IdentityProfileModel
+            if(email != "")
             {
-                User = _user,
-                Profile = _profile,
-                Roles = _roles
-            };
+                var _user = await _userManager.FindByNameAsync(email);
+                var _profile = await GetUserProfileAsync(_user.Id);
+                var _roles = await _userManager.GetRolesAsync(_user);
 
-            return profile;
+                IdentityProfileModel profile = new IdentityProfileModel
+                {
+                    User = _user,
+                    Profile = _profile,
+                    Roles = _roles
+                };
+
+                return profile;
+            }
+
+            return null!;
         }
 
         public async Task<IEnumerable<IdentityProfileModel>> GetIdentityProfilesRolesAsync(string role)

@@ -12,7 +12,6 @@ namespace Bmerketo.Models.Entities
         [Required]
         public Guid ProductId { get; set; }
 
-        [Required]
         public ProductEntity Product { get; set; }
 
         [Required]

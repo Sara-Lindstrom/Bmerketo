@@ -6,5 +6,6 @@ namespace Bmerketo.Models
     {
         public ProductEntity Product { get; set; }
         public ProductImageEntity ProductImages { get; set; }
+        public List<CategoryEntity>? Categories { get; set; }
     }
 }

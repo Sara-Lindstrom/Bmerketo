@@ -2,9 +2,9 @@
     @include md {
         grid-template-areas:
             "title title"
-            "price category"
             "review discountedPrice"
-            "primaryImage primaryImage"
+            "price category"
+            "primaryImage category"
             "imageOne imageTwo"
             "imageThree imageFour"
             "description description"
@@ -15,7 +15,7 @@
 
     .Price {grid-area: price;}
 
-    .Category {grid-area: category;}
+    .Categories {grid-area: category;}
 
     .DiscountedPrice {grid-area: discountedPrice;}
 

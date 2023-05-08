@@ -73,7 +73,13 @@
 
             <button class="light-button whishlist-btn">Add To Whishlist</button>
 
-            <p class="product-category">Category : @Model.Product.Product.Category , @if (Model.Product.Product.IsNew == true) { <span>New</span> }</p>
+            <p class="product-category">Category : @foreach (var category in Model.Product.Categories)
+                {
+                    <span class="product-category">@category.Category.ToString()</span>
+                } @if (Model.Product.Product.IsNew == true)
+                {
+                    <span class="product-category">New</span>
+                }</p>
         </div>
     </div>
 </div>

@@ -3,6 +3,8 @@ using Bmerketo.Models;
 using Bmerketo.Models.Entities;
 using Bmerketo.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using static Bmerketo.Models.Enums.CategoryEnumModel;
 
 namespace Bmerketo.Services
@@ -10,13 +12,15 @@ namespace Bmerketo.Services
     public class ProductServices
     {
         private readonly DataContext _context;
+        private readonly CategoriesService _categoriesService;
 
-        public ProductServices(DataContext context)
+        public ProductServices(DataContext context, CategoriesService categoriesService)
         {
             _context = context;
+            _categoriesService = categoriesService;
         }
 
-        public async Task<bool> RegisterNewProduct(ProductRegistrationViewModel registerViewModel)
+        public async Task<bool> RegisterNewProduct(ProductRegistrationViewModel registerViewModel, string[] tags)
         {
             try
             {
@@ -24,24 +28,18 @@ namespace Bmerketo.Services
                 _newProduct.CreatedDate = DateTime.Now;
                 _newProduct.IsNew = true;
 
-                _context.Products.Add(_newProduct);
+                EntityEntry<ProductEntity> entry = await _context.Products.AddAsync(_newProduct);
+                ProductEntity _entity = entry.Entity;
 
-                var oldProducts = await _context.Products
-                    .OrderByDescending(p => p.CreatedDate)
-                    .Skip(8)
-                    .Where(p=>p.IsNew == true)
-                    .ToListAsync();
-
-                if (oldProducts.Count() > 0)
+                if (_entity != null )
                 {
-                    foreach (var oldProduct in oldProducts)
-                    {
-                        oldProduct.IsNew = false;
-                    }
-                }
+                    await UpdateOldProductsAsync();
+                    await AddProductsTagsAsync(_entity, tags);
 
-                await _context.SaveChangesAsync();
-                return true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                return false;
             }
             catch
             {
@@ -55,19 +53,37 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                products.Add(item);
+            }
 
             return products;
         }
 
         public async Task<IEnumerable<CardModel>> GetByCategoryAsync(CategoryAlternativeEnum category)
         {
-            var items = await _context.Products
+
+            var items = await _context.Categories
                 .Where(x => x.Category == category)
-                .Include(p=> p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                var product = await _context.Products
+                    .Where(p => p.Id == item.ProductId)
+                    .Include(p => p.ProductImageData)
+                    .FirstOrDefaultAsync();
+
+                if(product != null)
+                {
+                    products.Add(product);
+                }
+            }
 
             return products;
 
@@ -75,16 +91,21 @@ namespace Bmerketo.Services
 
         public async Task<ProductModel> GetByIdAsync(string id)
         {
-            var _id = new Guid(id);
+            var _id = Guid.Parse(id);
             var item = await _context.Products
                 .Where(x => x.Id == _id)
                 .Include(p => p.ProductImageData)
                 .FirstOrDefaultAsync();
 
+            List<CategoryEntity> categories = await _context.Categories
+                .Where(c => c.ProductId == item.Id)
+                .ToListAsync();
+
             ProductModel product = new ProductModel
             {
                 Product = item,
-                ProductImages = item.ProductImageData
+                ProductImages = item.ProductImageData,
+                Categories = categories
             };
 
             return product;
@@ -101,7 +122,13 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                products.Add(item);
+            }
+
             return products;
         }
 
@@ -113,33 +140,47 @@ namespace Bmerketo.Services
                 .Include(p => p.ProductImageData)
                 .ToListAsync();
 
-            var products = ProductEntityToCardModel(items);
+            var products = new List<CardModel>();
+
+            foreach (var item in items)
+            {
+                products.Add(item);
+            }
+
             return products;
 
         }
 
-        private IEnumerable<CardModel> ProductEntityToCardModel(List<ProductEntity> items)
+        private async Task UpdateOldProductsAsync()
         {
-            var products = new List<CardModel>();
+            var oldProducts = await _context.Products
+                .OrderByDescending(p => p.CreatedDate)
+                .Skip(8)
+                .Where(p => p.IsNew == true)
+                .ToListAsync();
 
-            if (items.Count != 0)
+            if (oldProducts.Count() > 0)
             {
-                foreach (var item in items)
+                foreach (var oldProduct in oldProducts)
                 {
-                    var productCard = new CardModel
-                    {
-                        Id = item.Id,
-                        Title = item.Title,
-                        ImageUrl = item.ProductImageData.PrimaryImageData,
-                        ImageMimeType = item.ProductImageData.PrimaryImageMimeType,
-                        Price = item.Price,
-                        DiscountPrice = item.DiscountPrice,
-                    };
-                    products.Add(productCard);
+                    oldProduct.IsNew = false;
                 }
             }
-            return products;
 
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task AddProductsTagsAsync(ProductEntity entity, string[] tags)
+        {
+            foreach (var tag in tags)
+            {
+                var tagId = Convert.ToInt32(tag);
+                await _categoriesService.RegisterCategoryAsync(new CategoryEntity
+                {
+                    ProductId = entity.Id,
+                    Category = (CategoryAlternativeEnum)tagId
+                });
+            }
         }
     }
 }
