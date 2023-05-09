@@ -1,4 +1,5 @@
 ﻿@model UserRegisterViewModel
+<script src="~/js/FormValidation/UserRegister.js"></script>
 
 @{
     List<SelectListItem> _roles = new List<SelectListItem>();
@@ -36,27 +37,28 @@
 
             <div class="firstName form-group">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" required>
-                <span asp-validation-for="FirstName" class="error"></span>
+                <input asp-for="FirstName" id="name" onkeyup="validateForm(event, 'nameError', 'name')" required>
+                <span asp-validation-for="FirstName" id="nameError" class="error"></span>
+                <span  class="error"></span>
             </div>
             <div class="lastName form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName">
+                <input asp-for="LastName" required>
                 <span asp-validation-for="LastName" class="error"></span>
             </div>
             <div class="streetName form-group">
                 <label asp-for="StreetName"></label>
-                <input asp-for="StreetName">
+                <input asp-for="StreetName" required>
                 <span asp-validation-for="StreetName" class="error"></span>
             </div>
             <div class="postalCode form-group">
                 <label asp-for="PostalCode"></label>
-                <input asp-for="PostalCode">
+                <input asp-for="PostalCode" required>
                 <span asp-validation-for="PostalCode" class="error"></span>
             </div>
             <div class="city form-group">
                 <label asp-for="City"></label>
-                <input asp-for="City">
+                <input asp-for="City" required>
                 <span asp-validation-for="City" class="error"></span>
             </div>
             <div class="phoneNumber form-group">
@@ -83,7 +85,7 @@
             }
             <div class="email form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email">
+                <input asp-for="Email" required>
                 <span asp-validation-for="Email" class="error"></span>
             </div>
 
@@ -92,18 +94,18 @@
                 <div class="d-none">
                     <div class="password form-group">
                         <label asp-for="Password"></label>
-                        <input asp-for="Password" value=@password>
+                        <input asp-for="Password" value=@password required>
                         <span asp-validation-for="Password" class="error"></span>
                     </div>
                     <div class="confirmPassword form-group">
                         <label asp-for="ConfirmPassword"></label>
-                        <input asp-for="ConfirmPassword" value=@password>
+                        <input asp-for="ConfirmPassword" value=@password required>
                         <span asp-validation-for="ConfirmPassword" class="error"></span>
                     </div>
                     <div class="terms form-checkbox-group">
                         <label class="custom-checkbox">
                             <label asp-for="TermsAndAgreements"></label>
-                            <input asp-for="TermsAndAgreements">
+                            <input asp-for="TermsAndAgreements" required>
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -113,18 +115,18 @@
             {
                 <div class="password form-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" value=@password>
+                    <input asp-for="Password" value=@password required>
                     <span asp-validation-for="Password" class="error"></span>
                 </div>
                 <div class="confirmPassword form-group">
                     <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" value=@password>
+                    <input asp-for="ConfirmPassword" value=@password required>
                     <span asp-validation-for="ConfirmPassword" class="error"></span>
                 </div>
                 <div class="terms form-checkbox-group">
                     <label class="custom-checkbox">
                         <label asp-for="TermsAndAgreements"></label>
-                        <input asp-for="TermsAndAgreements">
+                        <input asp-for="TermsAndAgreements" required>
                         <span class="checkmark"></span>
                     </label>
                 </div>
@@ -142,3 +144,4 @@
         </form>
     </div>
 </section>
+

@@ -15,14 +15,10 @@
             </div>
             <div class="Price form-group">
                 <label asp-for="Price"></label>
-                <input asp-for="Price" class="invalid">
+                <input asp-for="Price" class="invalid" required>
                 <span asp-validation-for="Price" class="error"></span>
             </div>
             <div class="Categories form-group">
-
-                @*<span asp-validation-for="Categories" class="error"></span>*@
-
-
                 <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="categoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Select Categories
@@ -35,7 +31,7 @@
                                 <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
                         </div>
                     }
-                  </div>
+                    </div>
                 </div>
 
                 <script type="text/javascript">
@@ -63,32 +59,32 @@
             </div>
             <div class="PrimaryImage form-group">
                 <label asp-for="PrimaryImage"></label>
-                <input asp-for="PrimaryImage" type="file" class=" imageInput">
+                <input asp-for="PrimaryImage" type="file" class=" imageInput" required>
                 <span asp-validation-for="PrimaryImage" class="error"></span>
             </div>
             <div class="ImageOne form-group">
                 <label asp-for="ImageOne"></label>
-                <input asp-for="ImageOne" type="file" class=" imageInput">
+                <input asp-for="ImageOne" type="file" class=" imageInput" required>
                 <span asp-validation-for="ImageOne" class="error"></span>
             </div>
             <div class="ImageTwo form-group">
                 <label asp-for="ImageTwo"></label>
-                <input asp-for="ImageTwo" type="file" class=" imageInput">
+                <input asp-for="ImageTwo" type="file" class=" imageInput" required>
                 <span asp-validation-for="ImageTwo" class="error"></span>
             </div>
             <div class="ImageThree form-group">
                 <label asp-for="ImageThree"></label>
-                <input asp-for="ImageThree" type="file" class=" imageInput">
+                <input asp-for="ImageThree" type="file" class=" imageInput" required>
                 <span asp-validation-for="ImageThree" class="error"></span>
             </div>
             <div class="ImageFour form-group">
                 <label asp-for="ImageFour"></label>
-                <input asp-for="ImageFour" type="file" class=" imageInput">
+                <input asp-for="ImageFour" type="file" class=" imageInput" required>
                 <span asp-validation-for="ImageFour" class="error"></span>
             </div>      
             <div class="Description form-group">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="invalid" rows="4"></textarea>
+                <textarea asp-for="Description" class="invalid" rows="4" required></textarea>
                 <span asp-validation-for="Description" class="error"></span>
             </div>
             <div class="form-btn">

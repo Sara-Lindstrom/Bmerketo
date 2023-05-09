@@ -16,7 +16,7 @@
             </div>
             <div class="email form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" type="text" >
+                <input asp-for="Email" type="text" required>
                 <span asp-validation-for="Email" class="error"></span>
             </div>
             <div class="phoneNumber form-group">
@@ -29,7 +29,7 @@
             </div>
             <div class="message form-group">
                 <label asp-for="Message"></label>
-                <textarea asp-for="Message" ></textarea>
+                <textarea asp-for="Message" required></textarea>
                 <span asp-validation-for="Message" class="error"></span>
             </div>
             <div class="terms form-checkbox-group">
