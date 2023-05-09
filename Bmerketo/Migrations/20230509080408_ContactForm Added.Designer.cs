@@ -4,6 +4,7 @@ using Bmerketo.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bmerketo.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230509080408_ContactForm Added")]
+    partial class ContactFormAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,9 +44,6 @@ namespace Bmerketo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(320)");
@@ -61,6 +61,9 @@ namespace Bmerketo.Migrations
 
                     b.Property<bool>("SaveInfoInBrowser")
                         .HasColumnType("bit");
+
+                    b.Property<string>("companyName")
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
