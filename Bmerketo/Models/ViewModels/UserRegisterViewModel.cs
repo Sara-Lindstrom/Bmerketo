@@ -2,9 +2,7 @@
 using Bmerketo.Models.Entities;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
-using System.Net.NetworkInformation;
 
 namespace Bmerketo.Models.ViewModels
 {

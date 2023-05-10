@@ -24,12 +24,10 @@ public class ProductRegistrationViewModel
 
     [Required(ErrorMessage = "Product price is required.")]
     [Display(Name = "Product Price *")]
-    [DataType(DataType.Currency)]
     [RegularExpression(@"^(?!0+$)\d{1,8}(\.\d{1,2})?$", ErrorMessage = "Please enter a valid Price")]
     public decimal Price { get; set; }
 
     [Display(Name = "Discounted price (demonstrative porpoise)")]
-    [DataType(DataType.Currency)]
     [RegularExpression(@"^\d{1,8}(\.\d{1,2})?$", ErrorMessage = "Please enter a valid discounted price")]
     public decimal? DiscountPrice { get; set; }
 
