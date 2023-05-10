@@ -1,4 +1,6 @@
 ﻿@model ContactFormViewModel
+<script src="~/js/FormValidation.js"></script>
+
 <partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model.Breadcrumb"/>
 
 <!-- Contact form -->
@@ -8,20 +10,22 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-        <form class="contact-form" method="post" novalidate>
+        <form class="contact-form" method="post" novalidate onsubmit="return validateOnSubmit()">
             <div class="name form-group">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" type="text" required>
-                <span asp-validation-for="Name" class="error"></span>
+                <input asp-for="Name" type="text" id="cantactName" onkeyup="validateForm(event, 'cantactNameError', 'cantactName')" required>
+                <span asp-validation-for="Name" id="cantactNameError" class="error"></span>
             </div>
             <div class="email form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" type="text" >
-                <span asp-validation-for="Email" class="error"></span>
+                <input asp-for="Email" type="text" id="contactEmail" onkeyup="validateForm(event, 'contactEmailError', 'contactEmail')" required>
+                <span asp-validation-for="Email" id="contactEmailError" class="error"></span>
             </div>
             <div class="phoneNumber form-group">
                 <label asp-for="Phone"></label>
-                <input asp-for="Phone" type="text">
+                <input asp-for="Phone" type="text" id="contactPhoneNumber" onkeyup="validateForm(event, 'contactPhoneNumberError', 'contactPhoneNumber')">
+                <span id="contactPhoneNumberError" class="error"></span>
+
             </div>
             <div class="companyName form-group">
                 <label asp-for="CompanyName"></label>
@@ -29,8 +33,8 @@
             </div>
             <div class="message form-group">
                 <label asp-for="Message"></label>
-                <textarea asp-for="Message" ></textarea>
-                <span asp-validation-for="Message" class="error"></span>
+                <textarea asp-for="Message" id="contactMessage" onkeyup="validateForm(event, 'contactMessageError', 'contactMessage')" required></textarea>
+                <span asp-validation-for="Message" id="contactMessageError" class="error"></span>
             </div>
             <div class="terms form-checkbox-group">
                 <label class="custom-checkbox">

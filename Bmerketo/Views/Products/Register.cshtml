@@ -1,4 +1,5 @@
 ﻿@model ProductRegistrationViewModel
+<script src="~/js/FormValidation.js"></script>
 
 <section class="formSection">
     <div class="container form-container">
@@ -6,37 +7,33 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-        <form class="register-product-form" method="post" enctype="multipart/form-data" novalidate>
+        <form class="register-product-form" method="post" enctype="multipart/form-data" novalidate onsubmit="return validateOnSubmit()">
 
             <div class="Title form-group">
                 <label asp-for="Title"></label>
-                <input asp-for="Title" class="invalid" required>
-                <span asp-validation-for="Title" class="error"></span>
+                <input asp-for="Title" id="productTitle" onkeyup="validateForm(event, 'productTitleError', 'productTitle')" required>
+                <span asp-validation-for="Title" id="productTitleError" class="error"></span>
             </div>
             <div class="Price form-group">
                 <label asp-for="Price"></label>
-                <input asp-for="Price" class="invalid">
-                <span asp-validation-for="Price" class="error"></span>
+                <input asp-for="Price" id="productPrice" onkeyup="validateForm(event, 'productPriceError', 'productPrice')" value="">
+                <span asp-validation-for="Price" id="productPriceError" class="error"></span>
             </div>
             <div class="Categories form-group">
-
-                @*<span asp-validation-for="Categories" class="error"></span>*@
-
-
                 <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="categoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select Categories
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                    <button class="form-dropdown-btn" type="button" id="categoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Categories
+                    </button>
+                <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
                     @foreach (SelectListItem categoryAlternative in ViewBag.Categories)
                     {
                         <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="tags" value="@categoryAlternative.Value" id="category-@categoryAlternative.Text-@categoryAlternative.Value" checked="@categoryAlternative.Selected">
-                                <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
+                            <input class="form-check-input" type="checkbox" name="tags" value="@categoryAlternative.Value" id="category-@categoryAlternative.Text-@categoryAlternative.Value" checked="@categoryAlternative.Selected">
+                            <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
                         </div>
                     }
-                  </div>
                 </div>
+            </div>
 
                 <script type="text/javascript">
                     const dropdownButton = document.getElementById("categoriesDropdown");
@@ -53,43 +50,43 @@
             </div>
             <div class="DiscountPrice form-group">
                 <label asp-for="DiscountPrice"></label>
-                <input asp-for="DiscountPrice">
-                <span asp-validation-for="DiscountPrice" class="error"></span>
+                <input asp-for="DiscountPrice" id="productDiscountPrice" onkeyup="validateForm(event, 'productDiscountPriceError', 'productDiscountPrice')">
+                <span asp-validation-for="DiscountPrice" id="productDiscountPriceError" class="error"></span>
             </div>
             <div class="Review form-group">
                 <label asp-for="Review"></label>
-                <input asp-for="Review">
-                <span asp-validation-for="Review" class="error"></span>
+                <input asp-for="Review" id="productReview" onkeyup="validateForm(event, 'productReviewError', 'productReview')">
+                <span asp-validation-for="Review" id="productReviewError" class="error"></span>
             </div>
             <div class="PrimaryImage form-group">
                 <label asp-for="PrimaryImage"></label>
-                <input asp-for="PrimaryImage" type="file" class=" imageInput">
-                <span asp-validation-for="PrimaryImage" class="error"></span>
+                <input asp-for="PrimaryImage" type="file" class="imageInput" id="productPrimairyImage" onkeyup="validateForm(event, 'productPrimairyImageError', 'productPrimairyImage')" required>
+                <span asp-validation-for="PrimaryImage" id="productPrimairyImageError" class="error"></span>
             </div>
             <div class="ImageOne form-group">
                 <label asp-for="ImageOne"></label>
-                <input asp-for="ImageOne" type="file" class=" imageInput">
-                <span asp-validation-for="ImageOne" class="error"></span>
+                <input asp-for="ImageOne" type="file" class=" imageInput" id="productImageOne" onkeyup="validateForm(event, 'productImageOneError', 'productImageOne')" required>
+                <span asp-validation-for="ImageOne" id="productImageOneError" class="error"></span>
             </div>
             <div class="ImageTwo form-group">
                 <label asp-for="ImageTwo"></label>
-                <input asp-for="ImageTwo" type="file" class=" imageInput">
-                <span asp-validation-for="ImageTwo" class="error"></span>
+                <input asp-for="ImageTwo" type="file" class=" imageInput" id="productImageTwo" onkeyup="validateForm(event, 'productImageTwoError', 'productImageTwo')" required>
+                <span asp-validation-for="ImageTwo" id="productImageTwoError" class="error"></span>
             </div>
             <div class="ImageThree form-group">
                 <label asp-for="ImageThree"></label>
-                <input asp-for="ImageThree" type="file" class=" imageInput">
-                <span asp-validation-for="ImageThree" class="error"></span>
+                <input asp-for="ImageThree" type="file" class=" imageInput" id="productImageThree" onkeyup="validateForm(event, 'productImageThreeError', 'productImageThree')" required>
+                <span asp-validation-for="ImageThree" id="productImageThreeError" class="error"></span>
             </div>
             <div class="ImageFour form-group">
                 <label asp-for="ImageFour"></label>
-                <input asp-for="ImageFour" type="file" class=" imageInput">
-                <span asp-validation-for="ImageFour" class="error"></span>
+                <input asp-for="ImageFour" type="file" class=" imageInput" id="productImageFour" onkeyup="validateForm(event, 'productImageFourError', 'productImageFour')" required>
+                <span asp-validation-for="ImageFour" id="productImageFourError" class="error"></span>
             </div>      
             <div class="Description form-group">
                 <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="invalid" rows="4"></textarea>
-                <span asp-validation-for="Description" class="error"></span>
+                <textarea asp-for="Description" class="invalid" rows="4" id="productDescription" onkeyup="validateForm(event, 'productDescriptionError', 'productDescription')" required></textarea>
+                <span asp-validation-for="Description" id="productDescriptionError" class="error"></span>
             </div>
             <div class="form-btn">
                 <button type="submit" class="theme-button form-submit-btn">Submit Product</button>

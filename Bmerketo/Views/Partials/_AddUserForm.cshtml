@@ -1,4 +1,5 @@
 ﻿@model UserRegisterViewModel
+<script src="~/js/FormValidation.js"></script>
 
 @{
     List<SelectListItem> _roles = new List<SelectListItem>();
@@ -32,37 +33,38 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-        <form class="register-form" method="post" novalidate enctype="multipart/form-data">
+        <form class="register-form" method="post" enctype="multipart/form-data" novalidate onsubmit="return validateOnSubmit()">
+
 
             <div class="firstName form-group">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" required>
-                <span asp-validation-for="FirstName" class="error"></span>
+                <input asp-for="FirstName" id="firstName" onkeyup="validateForm(event, 'firstNameError', 'firstName')" required>
+                <span asp-validation-for="FirstName" id="firstNameError" class="error"></span>
             </div>
             <div class="lastName form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName">
-                <span asp-validation-for="LastName" class="error"></span>
+                <input asp-for="LastName" id="lastName" onkeyup="validateForm(event, 'lastNameError', 'lastName')" required>
+                <span asp-validation-for="LastName" id="lastNameError" class="error"></span>
             </div>
             <div class="streetName form-group">
                 <label asp-for="StreetName"></label>
-                <input asp-for="StreetName">
-                <span asp-validation-for="StreetName" class="error"></span>
+                <input asp-for="StreetName" id="streetName" onkeyup="validateForm(event, 'streetNameError', 'streetName')" required>
+                <span asp-validation-for="StreetName" id="streetNameError" class="error"></span>
             </div>
             <div class="postalCode form-group">
                 <label asp-for="PostalCode"></label>
-                <input asp-for="PostalCode">
-                <span asp-validation-for="PostalCode" class="error"></span>
+                <input asp-for="PostalCode" id="postalCode" onkeyup="validateForm(event, 'postalCodeError', 'postalCode')" required>
+                <span asp-validation-for="PostalCode" id="postalCodeError" class="error"></span>
             </div>
             <div class="city form-group">
                 <label asp-for="City"></label>
-                <input asp-for="City">
-                <span asp-validation-for="City" class="error"></span>
+                <input asp-for="City" id="city" onkeyup="validateForm(event, 'cityError', 'city')" required>
+                <span asp-validation-for="City" id="cityError" class="error"></span>
             </div>
             <div class="phoneNumber form-group">
                 <label asp-for="PhoneNumber"></label>
-                <input asp-for="PhoneNumber">
-                <span asp-validation-for="PhoneNumber" class="error"></span>
+                <input asp-for="PhoneNumber" id="phoneNumber" onkeyup="validateForm(event, 'phoneNumberError', 'phoneNumber')">
+                <span asp-validation-for="PhoneNumber" id="phoneNumberError" class="error"></span>
             </div>
             @if (signinManager.IsSignedIn(User) is false)
             {
@@ -72,7 +74,7 @@
                     <span asp-validation-for="CompanyName" class="error"></span>
                 </div>
             }
-            @if(signinManager.IsSignedIn(User) && User.IsInRole("admin"))
+            @if (signinManager.IsSignedIn(User) && User.IsInRole("admin"))
             {
                 <div class="companyName form-group">
                     <label asp-for="Role"></label>
@@ -83,8 +85,8 @@
             }
             <div class="email form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email">
-                <span asp-validation-for="Email" class="error"></span>
+                <input asp-for="Email" id="email" onkeyup="validateForm(event, 'emailError', 'email')" required>
+                <span asp-validation-for="Email" id="emailError" class="error"></span>
             </div>
 
             @if (signinManager.IsSignedIn(User) && User.IsInRole("admin"))
@@ -92,18 +94,18 @@
                 <div class="d-none">
                     <div class="password form-group">
                         <label asp-for="Password"></label>
-                        <input asp-for="Password" value=@password>
+                        <input asp-for="Password" value=@password required>
                         <span asp-validation-for="Password" class="error"></span>
                     </div>
                     <div class="confirmPassword form-group">
                         <label asp-for="ConfirmPassword"></label>
-                        <input asp-for="ConfirmPassword" value=@password>
+                        <input asp-for="ConfirmPassword" value=@password required>
                         <span asp-validation-for="ConfirmPassword" class="error"></span>
                     </div>
                     <div class="terms form-checkbox-group">
                         <label class="custom-checkbox">
                             <label asp-for="TermsAndAgreements"></label>
-                            <input asp-for="TermsAndAgreements">
+                            <input asp-for="TermsAndAgreements" required>
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -113,27 +115,27 @@
             {
                 <div class="password form-group">
                     <label asp-for="Password"></label>
-                    <input asp-for="Password" value=@password>
-                    <span asp-validation-for="Password" class="error"></span>
+                    <input asp-for="Password" id="password" onkeyup="validateForm(event, 'passwordError', 'password')" required>
+                    <span asp-validation-for="Password" id="passwordError" class="error"></span>
                 </div>
                 <div class="confirmPassword form-group">
                     <label asp-for="ConfirmPassword"></label>
-                    <input asp-for="ConfirmPassword" value=@password>
-                    <span asp-validation-for="ConfirmPassword" class="error"></span>
+                    <input asp-for="ConfirmPassword" id="confirmedPassword" onkeyup="validateForm(event, 'confirmedPasswordError', 'confirmedPassword')" required>
+                    <span asp-validation-for="ConfirmPassword" id="confirmedPasswordError" class="error"></span>
                 </div>
                 <div class="terms form-checkbox-group">
                     <label class="custom-checkbox">
                         <label asp-for="TermsAndAgreements"></label>
-                        <input asp-for="TermsAndAgreements">
-                        <span class="checkmark"></span>
+                        <input asp-for="TermsAndAgreements" required>
+                        <span asp-validation-for="TermsAndAgreements" class="checkmark"></span>
                     </label>
                 </div>
             }
 
             <div class="profileImage form-group">
                 <label asp-for="ProfileImg"></label>
-                <input asp-for="ProfileImg" type="file" class="imageInput">
-                <span asp-validation-for="ProfileImg" class="error"></span>
+                <input asp-for="ProfileImg" type="file" id="image" onchange="validateForm(event, 'imageError', 'image')" class="imageInput">
+                <span asp-validation-for="ProfileImg" id="imageError" class="error"></span>
             </div>
 
             <div class="form-btn">
@@ -142,3 +144,5 @@
         </form>
     </div>
 </section>
+
+

@@ -4,7 +4,7 @@
             "title title"
             "review discountedPrice"
             "price category"
-            "primaryImage category"
+            "primaryImage primaryImage"
             "imageOne imageTwo"
             "imageThree imageFour"
             "description description"
@@ -15,7 +15,12 @@
 
     .Price {grid-area: price;}
 
-    .Categories {grid-area: category;}
+    .Categories 
+    {
+        grid-area: category;
+        display:flex;
+        align-items:center;
+    }
 
     .DiscountedPrice {grid-area: discountedPrice;}
 

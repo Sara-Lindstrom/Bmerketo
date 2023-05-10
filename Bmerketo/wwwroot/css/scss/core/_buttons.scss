@@ -78,3 +78,28 @@ button {
         padding: 0.5rem 2rem;
     }
 }
+
+.form-dropdown-btn {
+    cursor: pointer;
+    padding: 5px 16px;
+    width:100%;
+    margin:auto;
+    background-color: $color-gray-10;
+    border: 1px solid $color-gray-20;
+    font-size: 0.7rem;
+    transition: all 300ms;
+    color: $color-theme-dark;
+
+    &:hover {
+        color: $color-theme;
+    }
+
+    @include md {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    @include lg {
+        padding: 0.5rem 2rem;
+    }
+}

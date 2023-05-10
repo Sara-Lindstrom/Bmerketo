@@ -29,17 +29,21 @@ namespace Bmerketo.Services
             if(email != "")
             {
                 var _user = await _userManager.FindByNameAsync(email);
-                var _profile = await GetUserProfileAsync(_user.Id);
-                var _roles = await _userManager.GetRolesAsync(_user);
-
-                IdentityProfileModel profile = new IdentityProfileModel
+                if(_user is not null)
                 {
-                    User = _user,
-                    Profile = _profile,
-                    Roles = _roles
-                };
+                    var _profile = await GetUserProfileAsync(_user.Id);
+                    var _roles = await _userManager.GetRolesAsync(_user);
 
-                return profile;
+                    IdentityProfileModel profile = new IdentityProfileModel
+                    {
+                        User = _user,
+                        Profile = _profile,
+                        Roles = _roles
+                    };
+
+                    return profile;
+                }
+                return null!;
             }
 
             return null!;
