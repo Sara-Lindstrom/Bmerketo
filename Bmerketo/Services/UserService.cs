@@ -3,6 +3,7 @@ using Bmerketo.Models;
 using Bmerketo.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Bmerketo.Services
 {
@@ -10,11 +11,13 @@ namespace Bmerketo.Services
     {
         private readonly IdentityContext _identityContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(IdentityContext context, UserManager<IdentityUser> userManager)
+        public UserService(IdentityContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _identityContext = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<UserProfileEntity?> GetUserProfileAsync(string userId)
@@ -68,6 +71,35 @@ namespace Bmerketo.Services
             }
 
             return result;
+        }
+
+        public async Task UpdateIdentityRoles(string id, string[] roles)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var newroles = new List<IdentityRole>();
+
+            foreach (var item in roles)
+            {
+                if(item is not null)
+                {
+                    newroles.Add(await _roleManager.FindByIdAsync(item));
+                }
+            }
+
+            if (user is not null)
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                if(userRoles is not null)
+                {
+                    await _userManager.RemoveFromRolesAsync(user, userRoles);
+
+                    foreach (var role in newroles)
+                    {
+                        await _userManager.AddToRoleAsync(user, role.Name);
+                    }
+                }
+            }
         }
     }
 }

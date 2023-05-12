@@ -1,7 +1,10 @@
-﻿using Bmerketo.Models.ViewModels;
+﻿using Bmerketo.Models;
+using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Bmerketo.Controllers
 {
@@ -10,7 +13,7 @@ namespace Bmerketo.Controllers
     {
         private readonly UserService _userService;
 
-        public AdminController(UserService userService)
+        public AdminController(UserService userService, RoleManager<IdentityRole> roleManager)
         {
             _userService = userService;
         }
@@ -40,6 +43,18 @@ namespace Bmerketo.Controllers
             };
 
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UserAdministration(string UserId, string[] roles)
+        {
+            if (ModelState.IsValid)
+            {
+                if(UserId is not null)
+                {
+                    await _userService.UpdateIdentityRoles(UserId, roles);
+                }
+            }
+            return RedirectToAction("UserAdministration", "admin");
         }
     }
 }

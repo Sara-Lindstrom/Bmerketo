@@ -1,22 +1,68 @@
 ﻿@model IdentityProfileModel
+<script src="~/js/OpenHiddenObject.js"></script>
 
-<li class="UserCard">
-    <div class="img-frame-small">
-        @if (Model.Profile.ProfileImage != "")
-        {
-            <img src="@($"data:{Model.Profile.ProfileImageMimeType};base64,{Model.Profile.ProfileImage}")" alt="">
-        }
-        else
-        {
-            <img src="~/images/placeholders/avatar.png" alt="">
-        }
-    </div>
+@{
+    List<SelectListItem> _roles = new List<SelectListItem>();
 
-    <div class="information">
-        <p class="info-display">@Model.Profile.FirstName, @Model.Profile.LastName</p>
-        @foreach(var role in Model.Roles)
+    var rolesFromDb = roleManager.Roles.ToList();
+
+    foreach (var role in rolesFromDb)
+    {
+        bool isInRole = false;
+        if (Model.Roles.Contains(role.Name))
         {
-            <p class="info-display">@role</p>
+            isInRole = true;
         }
-    </div>
-</li>
+
+        SelectListItem listitem = new SelectListItem
+        {
+            Text = role.Name,
+            Value = role.Id,
+            Selected = isInRole
+        };
+
+        _roles.Add(listitem);
+    }
+
+    string menuId = Model.Profile.Id.ToString();
+}
+
+<form method="post" novalidate>
+    <li class="UserCard">
+        <div class="img-frame-small">
+            @if (Model.Profile.ProfileImage != "")
+            {
+                <img src="@($"data:{Model.Profile.ProfileImageMimeType};base64,{Model.Profile.ProfileImage}")" alt="">
+            }
+            else
+            {
+                <img src="~/images/placeholders/avatar.png" alt="">
+            }
+        </div>
+
+        <div class="information">
+            <p class="info-display">@Model.Profile.FirstName, @Model.Profile.LastName</p>
+            @foreach (var role in Model.Roles)
+            {
+                <p class="info-display">@role</p>
+            }
+        </div>
+
+        <div class="dropdown" id="role-menu">
+            <button class="form-dropdown-btn" type="button" id="userRoleDropdown-@Model.Profile.Id" onclick="openElement('@menuId')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Change Role
+            </button>
+            <div id="@menuId" aria-labelledby=" userRoleDropdown" class="dropdownMenu d-none" type="dropdownMenu">
+                @foreach (SelectListItem roleAlternative in _roles)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" id="category-@roleAlternative.Text-@roleAlternative.Value" type="checkbox" userId="@Model.Profile.Id" roleName="@roleAlternative.Text" name="roles" value="@roleAlternative.Value" checked="@roleAlternative.Selected" onchange="checkboxChanged(this, 'button_@Model.Profile.Id.ToString()')">
+                        <label class="form-check-label" for="category-@roleAlternative.Text-@roleAlternative.Value">@roleAlternative.Text</label>
+                    </div>
+                }
+            </div>
+        </div>
+    </li>
+    <input type="hidden" name="UserId" value="@Model.User.Id" />
+    <button id="button_@Model.Profile.Id.ToString()" buttontype="changeButton" class="d-none form-btn theme-button" type="submit">Save Change</button>
+</form>
