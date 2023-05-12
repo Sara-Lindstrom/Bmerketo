@@ -1,5 +1,6 @@
 ﻿@model ProductRegistrationViewModel
 <script src="~/js/FormValidation.js"></script>
+<script src="~/js/OpenHiddenObject.js"></script>
 
 <section class="formSection">
     <div class="container form-container">
@@ -21,10 +22,10 @@
             </div>
             <div class="Categories form-group">
                 <div class="dropdown">
-                    <button class="form-dropdown-btn" type="button" id="categoriesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="form-dropdown-btn" type="button" id="categoriesDropdown" onclick="openElement('categoriesDropdownMenu')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Select Categories
                     </button>
-                <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                    <div class="dropdownMenu d-none" id="categoriesDropdownMenu" aria-labelledby="categoriesDropdown" id="categoriesDropdownMenu">
                     @foreach (SelectListItem categoryAlternative in ViewBag.Categories)
                     {
                         <div class="form-check">
@@ -35,18 +36,6 @@
                 </div>
             </div>
 
-                <script type="text/javascript">
-                    const dropdownButton = document.getElementById("categoriesDropdown");
-                    const dropdownMenu = document.querySelector(".dropdown-menu");
-                    const checkboxes = document.querySelectorAll(".form-check-input");
-                    const categoriesInput = document.querySelector('input[name="Categories"]');
-                    const selectedCategories = [];
-
-                    dropdownButton.addEventListener("click", () => {
-                        console.log("dropdown click");
-                        dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-                    });
-                </script>
             </div>
             <div class="DiscountPrice form-group">
                 <label asp-for="DiscountPrice"></label>
