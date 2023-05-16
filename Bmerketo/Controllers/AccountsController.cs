@@ -41,6 +41,7 @@ namespace Bmerketo.Controllers
         public IActionResult Register()
         {
             ViewData["Title"] = "Register";
+            ViewBag.Roles = _userService.GetRolesSelectListItems();
 
             return View();
         }
@@ -53,6 +54,10 @@ namespace Bmerketo.Controllers
             if (User.IsInRole("admin"))
             {
                 ViewModel.TermsAndAgreements = true;
+            }
+            else
+            {
+                ViewModel.Role = "user";
             }
 
             if (ModelState.IsValid)
@@ -71,6 +76,11 @@ namespace Bmerketo.Controllers
                 {
                     ModelState.AddModelError("", "Oops, something went wrong and we could not register your account at the moment!");
                 }
+            }
+
+            if (!ViewModel.TermsAndAgreements)
+            {
+                ModelState.AddModelError(nameof(ViewModel.TermsAndAgreements), "You must accept the terms and agreements to register.");
             }
 
             return View(ViewModel);

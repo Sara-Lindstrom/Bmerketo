@@ -8,19 +8,19 @@
 
     if(signinManager.IsSignedIn(User) && User.IsInRole("admin"))
     {
-        var rolesFromDb = roleManager.Roles.ToList();
+        //var rolesFromDb = roleManager.Roles.ToList();
 
-        foreach(var role in rolesFromDb)
-        {
-            SelectListItem listitem = new SelectListItem
-            {
-                Text = role.Name,
-                Value = role.Id,
-                Selected = false
-            };
+        //foreach(var role in rolesFromDb)
+        //{
+        //    SelectListItem listitem = new SelectListItem
+        //    {
+        //        Text = role.Name,
+        //        Value = role.Id,
+        //        Selected = false
+        //    };
 
-            _roles.Add(listitem);
-        }
+        //    _roles.Add(listitem);
+        //}
 
         password = "BytMig123!";
 
@@ -78,7 +78,7 @@
             {
                 <div class="companyName form-group">
                     <label asp-for="Role"></label>
-                    <select asp-for="Role" asp-items="@_roles">
+                    <select asp-for="Role" asp-items="@ViewBag.Roles">
                     </select>
                     <span asp-validation-for="Role" class="error"></span>
                 </div>
@@ -123,13 +123,17 @@
                     <input asp-for="ConfirmPassword" id="confirmedPassword" onkeyup="validateForm(event, 'confirmedPasswordError', 'confirmedPassword')" required>
                     <span asp-validation-for="ConfirmPassword" id="confirmedPasswordError" class="error"></span>
                 </div>
-                <div class="terms form-checkbox-group">
-                    <label class="custom-checkbox">
-                        <label asp-for="TermsAndAgreements"></label>
-                        <input asp-for="TermsAndAgreements" required>
-                        <span asp-validation-for="TermsAndAgreements" class="checkmark"></span>
-                    </label>
+                <div class="terms form-group">
+                    <div class="form-checkbox-group">
+                        <label class="custom-checkbox">
+                            <label asp-for="TermsAndAgreements"></label>
+                            <input asp-for="TermsAndAgreements" required>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <span asp-validation-for="TermsAndAgreements" class="error"></span>
                 </div>
+
             }
 
             <div class="profileImage form-group">

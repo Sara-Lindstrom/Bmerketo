@@ -2,6 +2,8 @@
 
 @{
     int i = 0;
+
+    var cardSizeSmall = new ViewDataDictionary(ViewData) { { "CardSize", "card-small" } };
 }
 <partial name="/Views/Partials/_Breadcrumb.cshtml" model="@Model.Breadcrumb"/>
 
@@ -126,18 +128,37 @@
 </div>
 <!-- Information tabs end -->
 <!-- Related Products -->
-@*<div class="container related">
+<div class="container related">
     <h4 class="relatedTitle">Related Products</h4>
 
     <div class="cardcontainer">
-        <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
-
-        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
-        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
-        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
-        <partial name="/Views/Partials/_Card.cshtml" view-data='cardSizeSmall'/>
-
+        @foreach (CardModel card in Model.RelatedCards)
+        {
+            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall'/>
+        }
+        @foreach (CardModel card in Model.RelatedCards)
+        {
+            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+        }
+        @foreach (CardModel card in Model.RelatedCards)
+        {
+            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+        }
+        @foreach (CardModel card in Model.RelatedCards)
+        {
+            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+        }
     </div>
-</div>*@
+</div>
+
+<div class="other-images-banner">
+    <div class="container small-other-images">
+        <img src="~/images/placeholders/200x122.svg" class="other-image"/>
+        <img src="~/images/placeholders/200x122.svg" class="other-image"/>
+        <img src="~/images/placeholders/200x122.svg" class="other-image" />
+        <img src="~/images/placeholders/200x122.svg" class="other-image" />
+        <img src="~/images/placeholders/200x122.svg" class="other-image" />
+    </div>
+</div>
 <!-- Related Products end -->
 

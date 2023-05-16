@@ -44,7 +44,7 @@ namespace Bmerketo.Models.ViewModels
 
 
         [Display(Name = "Users Role (optional)")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
 
         [Required(ErrorMessage = "Your email is required.")]
@@ -84,7 +84,7 @@ namespace Bmerketo.Models.ViewModels
             {
                 UserName = model.Email,
                 Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
+                PhoneNumber = FormatService.FormatPhoneNumber(model.PhoneNumber),
             };
             return _identityUser;
         }
@@ -93,8 +93,8 @@ namespace Bmerketo.Models.ViewModels
         {
             var _userEntity = new UserProfileEntity
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                FirstName = FormatService.FormatName(model.FirstName),
+                LastName = FormatService.FormatName(model.LastName),
                 CompanyName = model.CompanyName,
                 ProfileImage = TypeConvertServices.ImageIFormateFileTobase64Convert(model.ProfileImg)
             };
@@ -107,9 +107,9 @@ namespace Bmerketo.Models.ViewModels
             return new AdressEntity
             {
                 Id = Guid.NewGuid(),
-                StreetName = model.StreetName,
-                PostalCode = model.PostalCode,
-                City = model.City
+                StreetName = FormatService.FormatName(model.StreetName),
+                PostalCode = FormatService.FormatPostalCode(model.PostalCode),
+                City = FormatService.FormatName(model.City)
             };
         }
     }

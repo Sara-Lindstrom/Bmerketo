@@ -1,40 +1,50 @@
 ﻿.register-product-form {
     @include md {
         grid-template-areas:
-            "title title"
-            "review discountedPrice"
-            "price category"
-            "primaryImage primaryImage"
-            "imageOne imageTwo"
-            "imageThree imageFour"
-            "description description"
-            "button button"
+            "title title" "review discountedPrice" "price category" "primaryImage primaryImage" "imageOne imageTwo" "imageThree imageFour" "description description" "button button"
     }
 
-    .Title {grid-area: title;}
+    .Title {
+        grid-area: title;
+    }
 
-    .Price {grid-area: price;}
+    .Price {
+        grid-area: price;
+    }
 
-    .Categories 
-    {
+    .Categories {
         grid-area: category;
-        display:flex;
-        align-items:center;
     }
 
-    .DiscountedPrice {grid-area: discountedPrice;}
+    .DiscountedPrice {
+        grid-area: discountedPrice;
+    }
 
-    .Review {grid-area: review;}
+    .Review {
+        grid-area: review;
+    }
 
-    .PrimaryImage {grid-area: primaryImage;}
+    .PrimaryImage {
+        grid-area: primaryImage;
+    }
 
-    .ImageOne {grid-area: imageOne;}
+    .ImageOne {
+        grid-area: imageOne;
+    }
 
-    .ImageTwo {grid-area: imageTwo;}
+    .ImageTwo {
+        grid-area: imageTwo;
+    }
 
-    .ImageThree {grid-area: imageThree;}
+    .ImageThree {
+        grid-area: imageThree;
+    }
 
-    .ImageFour {grid-area: imageFour;}
+    .ImageFour {
+        grid-area: imageFour;
+    }
 
-    .Description {grid-area: description;}
+    .Description {
+        grid-area: description;
+    }
 }

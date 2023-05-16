@@ -1,4 +1,5 @@
 ﻿
+using Bmerketo.Models;
 using Bmerketo.Models.Enums;
 using Bmerketo.Models.ViewModels;
 using Bmerketo.Services;
@@ -13,9 +14,9 @@ namespace Bmerketo.Controllers
     public class ProductsController : Controller
     {
         private readonly ProductServices _productServices;
-        private readonly CategoriesService _categoriesService;
+        private readonly CategoryService _categoriesService;
 
-        public ProductsController(ProductServices productServices, CategoriesService categoriesService)
+        public ProductsController(ProductServices productServices, CategoryService categoriesService)
         {
             _productServices = productServices;
             _categoriesService = categoriesService;
@@ -74,7 +75,14 @@ namespace Bmerketo.Controllers
                         Crumbs = new List<string> { "PRODUCTS", "DETAILS" }
                     },
                     Product = await _productServices.GetByIdAsync(id)
-                };
+                }; 
+
+                if (model.Product.Categories.Count > 0)
+                {
+                    var relatedProductEnum = model.Product.Categories.FirstOrDefault().Category;
+                    var relatedCards = await _productServices.GetByCategoryAsync(relatedProductEnum);
+                    model.RelatedCards = relatedCards.Take(4).ToList();
+                }
 
                 return View(model);
             }

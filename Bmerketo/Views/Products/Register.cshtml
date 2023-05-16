@@ -20,21 +20,21 @@
                 <input asp-for="Price" id="productPrice" onkeyup="validateForm(event, 'productPriceError', 'productPrice')" value="">
                 <span asp-validation-for="Price" id="productPriceError" class="error"></span>
             </div>
-            <div class="Categories form-group">
+            <div class="Categories form-group dropdown-section">
                 <div class="dropdown">
                     <button class="form-dropdown-btn" type="button" id="categoriesDropdown" onclick="openElement('categoriesDropdownMenu')" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Select Categories
                     </button>
                     <div class="dropdownMenu d-none" id="categoriesDropdownMenu" aria-labelledby="categoriesDropdown" id="categoriesDropdownMenu">
-                    @foreach (SelectListItem categoryAlternative in ViewBag.Categories)
-                    {
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tags" value="@categoryAlternative.Value" id="category-@categoryAlternative.Text-@categoryAlternative.Value" checked="@categoryAlternative.Selected">
-                            <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
-                        </div>
-                    }
+                        @foreach (SelectListItem categoryAlternative in ViewBag.Categories)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="tags" value="@categoryAlternative.Value" id="category-@categoryAlternative.Text-@categoryAlternative.Value" checked="@categoryAlternative.Selected">
+                                <label class="form-check-label" for="category-@categoryAlternative.Text-@categoryAlternative.Value">@categoryAlternative.Text</label>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
 
             </div>
             <div class="DiscountPrice form-group">

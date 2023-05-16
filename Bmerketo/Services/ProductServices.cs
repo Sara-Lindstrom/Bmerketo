@@ -12,9 +12,9 @@ namespace Bmerketo.Services
     public class ProductServices
     {
         private readonly DataContext _context;
-        private readonly CategoriesService _categoriesService;
+        private readonly CategoryService _categoriesService;
 
-        public ProductServices(DataContext context, CategoriesService categoriesService)
+        public ProductServices(DataContext context, CategoryService categoriesService)
         {
             _context = context;
             _categoriesService = categoriesService;
