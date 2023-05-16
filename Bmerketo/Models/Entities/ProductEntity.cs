@@ -26,10 +26,10 @@ namespace Bmerketo.Models.Entities
         public int? Review { get; set; }
 
         [Required]
-        [Column(TypeName ="money")]
+        [Column(TypeName ="decimal(7, 2)")]
         public decimal Price { get; set; }
 
-        [Column(TypeName = "money")]
+        [Column(TypeName = "decimal(7, 2)")]
         public decimal? DiscountPrice { get; set; }
 
         public ICollection<CategoryEntity>? Categories { get; set; }

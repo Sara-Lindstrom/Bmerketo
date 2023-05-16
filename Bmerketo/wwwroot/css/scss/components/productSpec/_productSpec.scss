@@ -9,9 +9,12 @@
         flex: 1;
         margin: auto;
         max-width: 501px;
+        margin-top:20px;
+        margin-bottom:20px;
 
         .large-image {
             max-width: 100%;
+            min-width:100%;
         }
 
         .small-image-container {

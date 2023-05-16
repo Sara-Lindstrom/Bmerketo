@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Bmerketo.Services;
 
 namespace Bmerketo.Models.ViewModels
 {
@@ -48,9 +49,9 @@ namespace Bmerketo.Models.ViewModels
             var _contactEntity = new ContactEntity
             {
                 Id = model.Id,
-                Name = model.Name,
+                Name = FormatService.FormatName(model.Name),
                 Email = model.Email,
-                Phone = model.Phone,
+                Phone = FormatService.FormatPhoneNumber(model.Phone),
                 CompanyName = model.CompanyName,
                 Message = model.Message,
                 SaveInfoInBrowser = model.SaveInfoInBrowser,

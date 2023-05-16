@@ -6,5 +6,6 @@ namespace Bmerketo.Models.ViewModels
     {
         public BreadcrumbViewModel Breadcrumb { get; set; }
         public ProductModel Product { get; set; }
+        public List<CardModel> RelatedCards { get; set; }
     }
 }

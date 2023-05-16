@@ -42,14 +42,14 @@ namespace Bmerketo.Services
 
                 if ((await _userManager.CreateAsync(identityUser, model.Password)).Succeeded)
                 {
-                    //Add role if not admin
+                    //Add Admin as role
                     if (await _userManager.Users.CountAsync() == 1)
                     {
                         await _userManager.AddToRoleAsync(identityUser, "admin");
                     }
                     else
                     {
-                        //Add role if admin
+                        //Add user as role
                         var role = await _roleManager.FindByIdAsync(model.Role);
                         await _userManager.AddToRoleAsync(identityUser, role.Name);
                     }
@@ -61,7 +61,8 @@ namespace Bmerketo.Services
                     AdressEntity adressEntity = model;
 
                     //create Address
-                    var _adressFromDB = await _identityContext.Adresses.FirstOrDefaultAsync(x => x.StreetName == adressEntity.StreetName && x.PostalCode == adressEntity.PostalCode && x.City == adressEntity.City);
+                    var _adressFromDB = await _identityContext.Adresses
+                        .FirstOrDefaultAsync(x => x.StreetName == adressEntity.StreetName && x.PostalCode == adressEntity.PostalCode && x.City == adressEntity.City);
 
 
                     if (_adressFromDB is null)
@@ -90,8 +91,39 @@ namespace Bmerketo.Services
             }
             catch
             {
+                IdentityUser identityUser = model;
+                AdressEntity adressEntity = model;
+
+                var existingUser = await _userManager.FindByEmailAsync(identityUser.Email);
+                if (existingUser is not null)
+                {
+                    var existingProfile = await _identityContext.UserProfiles
+                        .Where(p => p.User == existingUser)
+                        .FirstOrDefaultAsync();
+
+                    if (existingProfile is not null)
+                    {
+                        _identityContext.UserProfiles.Remove(existingProfile);
+                    }
+
+                    await _userManager.DeleteAsync(existingUser);
+                    await _identityContext.SaveChangesAsync();
+                }
+
+                DeleteUnreferencedAddresses();
+
                 return ResponseEnum.Failed;
             }
+        }
+
+        public async Task DeleteUnreferencedAddresses()
+        {
+            var unreferencedAddresses = await _identityContext.Adresses
+                .Where(a => !_identityContext.UserProfiles.Any(p => p.AdressId == a.Id))
+                .ToListAsync();
+
+            _identityContext.Adresses.RemoveRange(unreferencedAddresses);
+            var numDeleted = await _identityContext.SaveChangesAsync();
         }
 
         public async Task<LoginResponseEnum> LoginToAccountAsync(LoginViewModel model)

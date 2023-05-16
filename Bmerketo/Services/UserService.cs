@@ -2,8 +2,10 @@
 using Bmerketo.Models;
 using Bmerketo.Models.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using static Bmerketo.Models.Enums.CategoryEnumModel;
 
 namespace Bmerketo.Services
 {
@@ -100,6 +102,17 @@ namespace Bmerketo.Services
                     }
                 }
             }
+        }
+
+        public List<SelectListItem> GetRolesSelectListItems()
+        {
+            return _roleManager.Roles
+                .Select(v => new SelectListItem
+                {
+                    Text = v.Name,
+                    Value = v.Id
+                })
+                .ToList();
         }
     }
 }
