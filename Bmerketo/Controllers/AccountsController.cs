@@ -15,12 +15,14 @@ namespace Bmerketo.Controllers
         private readonly AccountServices _service;
         private readonly UserService _userService;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountsController(UserService userService, AccountServices service, SignInManager<IdentityUser> signInManager)
+        public AccountsController(UserService userService, AccountServices service, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _userService = userService;
             _service = service;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         //My Account
@@ -54,6 +56,11 @@ namespace Bmerketo.Controllers
             if (User.IsInRole("admin"))
             {
                 ViewModel.TermsAndAgreements = true;
+                var role = await _roleManager.FindByIdAsync(ViewModel.Role);
+                if (role is not null)
+                {
+                    ViewModel.Role = role.Name;
+                }
             }
             else
             {
@@ -66,6 +73,10 @@ namespace Bmerketo.Controllers
 
                 if (returnedKey == ResponseEnum.Success)
                 {
+                    if (User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("index", "admin");
+                    }
                     return RedirectToAction("login", "accounts");
                 }
                 else if (returnedKey == ResponseEnum.EmailExists)

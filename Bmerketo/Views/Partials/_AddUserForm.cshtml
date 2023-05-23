@@ -123,16 +123,14 @@
                     <input asp-for="ConfirmPassword" id="confirmedPassword" onkeyup="validateForm(event, 'confirmedPasswordError', 'confirmedPassword')" required>
                     <span asp-validation-for="ConfirmPassword" id="confirmedPasswordError" class="error"></span>
                 </div>
-                <div class="terms form-group">
-                    <div class="form-checkbox-group">
-                        <label class="custom-checkbox">
-                            <label asp-for="TermsAndAgreements"></label>
-                            <input asp-for="TermsAndAgreements" required>
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <span asp-validation-for="TermsAndAgreements" class="error"></span>
+                <div class="terms form-checkbox-group">
+                    <label class="custom-checkbox">
+                        <label asp-for="TermsAndAgreements"></label>
+                        <input asp-for="TermsAndAgreements">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
+                <span asp-validation-for="TermsAndAgreements" class="termsError error"></span>
 
             }
 

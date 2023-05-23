@@ -12,6 +12,7 @@
         "confirmPassword confirmPassword"
         "profileImage profileImage"
         "terms terms"
+        "termsError termsError"
         "button button";
     }
 
@@ -27,6 +28,7 @@
     .confirmPassword    { grid-area: confirmPassword; }
     .profileImage       { grid-area: profileImage; }
     .terms              { grid-area: terms; }
+    .termsError         { grid-area:termsError; }
 
 }
 

@@ -19,7 +19,7 @@ public class ProductRegistrationViewModel
     [Display(Name = "Product Description *")]
     public string Description { get; set; } = null!;
 
-    [Display(Name = "Product Review (demonstrative porpoise)")]
+    [Display(Name = "Product Review (demonstrative purposes)")]
     public int? Review { get; set; }
 
     [Required(ErrorMessage = "Product price is required.")]
@@ -27,7 +27,7 @@ public class ProductRegistrationViewModel
     [RegularExpression(@"^(?!0+$)\d{1,8}(\.\d{1,2})?$", ErrorMessage = "Please enter a valid Price")]
     public decimal Price { get; set; }
 
-    [Display(Name = "Discounted price (demonstrative porpoise)")]
+    [Display(Name = "Discounted price (demonstrative purposes)")]
     [RegularExpression(@"^\d{1,8}(\.\d{1,2})?$", ErrorMessage = "Please enter a valid discounted price")]
     public decimal? DiscountPrice { get; set; }
 

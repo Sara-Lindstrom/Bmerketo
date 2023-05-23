@@ -155,7 +155,7 @@ namespace Bmerketo.Services
         {
             var oldProducts = await _context.Products
                 .OrderByDescending(p => p.CreatedDate)
-                .Skip(8)
+                .Skip(7)
                 .Where(p => p.IsNew == true)
                 .ToListAsync();
 
@@ -178,6 +178,7 @@ namespace Bmerketo.Services
                 await _categoriesService.RegisterCategoryAsync(new CategoryEntity
                 {
                     ProductId = entity.Id,
+                    Product = entity,
                     Category = (CategoryAlternativeEnum)tagId
                 });
             }

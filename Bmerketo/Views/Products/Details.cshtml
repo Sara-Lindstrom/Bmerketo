@@ -1,4 +1,6 @@
 ﻿@model ProductDetailsViewModel
+<script src="~/js/RedirectToDetailsPage.js"></script>
+
 
 @{
     int i = 0;
@@ -132,21 +134,12 @@
     <h4 class="relatedTitle">Related Products</h4>
 
     <div class="cardcontainer">
-        @foreach (CardModel card in Model.RelatedCards)
+        @if(Model.RelatedCards is not null)
         {
-            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall'/>
-        }
-        @foreach (CardModel card in Model.RelatedCards)
-        {
-            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
-        }
-        @foreach (CardModel card in Model.RelatedCards)
-        {
-            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
-        }
-        @foreach (CardModel card in Model.RelatedCards)
-        {
-            <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+            @foreach (CardModel card in Model.RelatedCards)
+            {
+                <partial name="/Views/Partials/_Card.cshtml" model="@card" view-data='cardSizeSmall' />
+            }
         }
     </div>
 </div>

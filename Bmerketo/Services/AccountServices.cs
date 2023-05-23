@@ -50,7 +50,7 @@ namespace Bmerketo.Services
                     else
                     {
                         //Add user as role
-                        var role = await _roleManager.FindByIdAsync(model.Role);
+                        var role = await _roleManager.FindByNameAsync(model.Role);
                         await _userManager.AddToRoleAsync(identityUser, role.Name);
                     }
 
