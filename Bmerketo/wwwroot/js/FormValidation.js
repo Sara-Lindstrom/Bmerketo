@@ -140,7 +140,6 @@ function validatePhoneNumber(element, errorMsgElement, label) {
 
     if (!phoneNumberRegEx.test(element.value)) {
         errorMsgElement.innerText = `Please enter a valid ${label}. (ex: 012 3456789)`;
-
     }
     else {
         errorMsgElement.innerText = "";

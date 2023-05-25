@@ -39,6 +39,7 @@ namespace Bmerketo.Controllers
             if (ModelState.IsValid)
             {
                 _contactService.RegisterContactFormAsync(viewModel);
+                return RedirectToAction("index", "contacts");
             }
 
             return View(viewModel);
